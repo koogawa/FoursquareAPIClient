@@ -13,6 +13,11 @@
 		21AAEAAF1B607EFC0067944E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AAEAAE1B607EFC0067944E /* Images.xcassets */; };
 		21AAEAB21B607EFC0067944E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21AAEAB01B607EFC0067944E /* LaunchScreen.xib */; };
 		21AAEABE1B607EFC0067944E /* FoursquareAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AAEABD1B607EFC0067944E /* FoursquareAPIClientTests.swift */; };
+		21D02B251B60B34F0030F2D7 /* VenueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B241B60B34F0030F2D7 /* VenueListViewController.swift */; };
+		21D02B281B60B4B00030F2D7 /* FoursquareAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */; };
+		21D02B2C1B60B4D80030F2D7 /* FoursquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */; };
+		21D02B2D1B60B4D80030F2D7 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B2B1B60B4D80030F2D7 /* Venue.swift */; };
+		CD2E0F439057D4AA80BC677F /* Pods_FoursquareAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F1D2781FB0F8E9EFB4BB8D /* Pods_FoursquareAPIClient.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,13 @@
 		21AAEAB71B607EFC0067944E /* FoursquareAPIClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoursquareAPIClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AAEABC1B607EFC0067944E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AAEABD1B607EFC0067944E /* FoursquareAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoursquareAPIClientTests.swift; sourceTree = "<group>"; };
+		21D02B241B60B34F0030F2D7 /* VenueListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VenueListViewController.swift; path = Controller/VenueListViewController.swift; sourceTree = "<group>"; };
+		21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoursquareAPIClient.swift; path = ../FoursquareAPIClient/FoursquareAPIClient.swift; sourceTree = "<group>"; };
+		21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareManager.swift; sourceTree = "<group>"; };
+		21D02B2B1B60B4D80030F2D7 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		479A8A4A0187A020AB00AEED /* Pods-FoursquareAPIClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareAPIClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient.debug.xcconfig"; sourceTree = "<group>"; };
+		A1F1D2781FB0F8E9EFB4BB8D /* Pods_FoursquareAPIClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoursquareAPIClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3F7DDADD4C59385E4671B30 /* Pods-FoursquareAPIClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareAPIClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2E0F439057D4AA80BC677F /* Pods_FoursquareAPIClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,8 +73,11 @@
 			isa = PBXGroup;
 			children = (
 				21AAEAA41B607EFC0067944E /* FoursquareAPIClient */,
+				21D02B261B60B45E0030F2D7 /* Lib */,
 				21AAEABA1B607EFC0067944E /* FoursquareAPIClientTests */,
 				21AAEAA31B607EFC0067944E /* Products */,
+				F1B4C80420C291BE6221C202 /* Pods */,
+				95E8EA72981EDB71BAF9EBB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +93,8 @@
 		21AAEAA41B607EFC0067944E /* FoursquareAPIClient */ = {
 			isa = PBXGroup;
 			children = (
+				21D02B291B60B4D80030F2D7 /* Model */,
+				21D02B231B60B2E20030F2D7 /* Controller */,
 				21AAEAA71B607EFC0067944E /* AppDelegate.swift */,
 				21AAEAA91B607EFC0067944E /* ViewController.swift */,
 				21AAEAAB1B607EFC0067944E /* Main.storyboard */,
@@ -112,6 +130,48 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		21D02B231B60B2E20030F2D7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				21D02B241B60B34F0030F2D7 /* VenueListViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		21D02B261B60B45E0030F2D7 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		21D02B291B60B4D80030F2D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */,
+				21D02B2B1B60B4D80030F2D7 /* Venue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		95E8EA72981EDB71BAF9EBB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1F1D2781FB0F8E9EFB4BB8D /* Pods_FoursquareAPIClient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1B4C80420C291BE6221C202 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				479A8A4A0187A020AB00AEED /* Pods-FoursquareAPIClient.debug.xcconfig */,
+				A3F7DDADD4C59385E4671B30 /* Pods-FoursquareAPIClient.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +179,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21AAEAC11B607EFC0067944E /* Build configuration list for PBXNativeTarget "FoursquareAPIClient" */;
 			buildPhases = (
+				7301BB248A2103CC4CD7A520 /* Check Pods Manifest.lock */,
 				21AAEA9E1B607EFC0067944E /* Sources */,
 				21AAEA9F1B607EFC0067944E /* Frameworks */,
 				21AAEAA01B607EFC0067944E /* Resources */,
+				2B6687DCE74742F055F7D4B3 /* Embed Pods Frameworks */,
+				1E0DE99F2C2E172DCB26C2AD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,12 +270,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E0DE99F2C2E172DCB26C2AD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B6687DCE74742F055F7D4B3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7301BB248A2103CC4CD7A520 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		21AAEA9E1B607EFC0067944E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D02B2C1B60B4D80030F2D7 /* FoursquareManager.swift in Sources */,
+				21D02B2D1B60B4D80030F2D7 /* Venue.swift in Sources */,
 				21AAEAAA1B607EFC0067944E /* ViewController.swift in Sources */,
+				21D02B251B60B34F0030F2D7 /* VenueListViewController.swift in Sources */,
+				21D02B281B60B4B00030F2D7 /* FoursquareAPIClient.swift in Sources */,
 				21AAEAA81B607EFC0067944E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +406,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -329,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -338,6 +453,7 @@
 		};
 		21AAEAC21B607EFC0067944E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 479A8A4A0187A020AB00AEED /* Pods-FoursquareAPIClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FoursquareAPIClient/Info.plist;
@@ -348,6 +464,7 @@
 		};
 		21AAEAC31B607EFC0067944E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3F7DDADD4C59385E4671B30 /* Pods-FoursquareAPIClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FoursquareAPIClient/Info.plist;
@@ -409,6 +526,7 @@
 				21AAEAC31B607EFC0067944E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		21AAEAC41B607EFC0067944E /* Build configuration list for PBXNativeTarget "FoursquareAPIClientTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +535,7 @@
 				21AAEAC61B607EFC0067944E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
