@@ -3,10 +3,8 @@
 //  VenueMap
 //
 //  Created by koogawa on 2015/07/21.
-//  Copyright (c) 2015年 Kosuke Ogawa. All rights reserved.
+//  Copyright (c) 2015 Kosuke Ogawa. All rights reserved.
 //
-//  ベニューオブジェクトを管理するシングルトンオブジェクト
-//  ベニュー一覧を取得するときはこれを介して操作する
 
 import UIKit
 import MapKit
@@ -25,18 +23,15 @@ class FoursquareManager: NSObject {
         return Static.instance
     }
 
-    func searchVenuesWithCoordinate(coordinate: CLLocationCoordinate2D, query: String, completion: ((NSError?) -> ())?) {
+    func searchVenuesWithCoordinate(coordinate: CLLocationCoordinate2D, completion: ((NSError?) -> ())?) {
 
-        // TODO: この辺はちゃんと定数化しような
+        let client = FoursquareAPIClient(accessToken: "YOUR_ACCESS_TOKEN")
+        
         let parameter: [String: String] = [
             "ll": "\(coordinate.latitude),\(coordinate.longitude)",
-            "limit": SettingsManager.sharedManager().limitOfVenues().description,
-            "oauth_token": "LZW1YQW5SVHEJP5JTHPWRS4MQ1MRMBVKM1B1FA2JO2YPFXHZ",
-            "v": "20150710",
-            "m": "swarm"
         ];
 
-        FoursquareAPIClient.sharedClient().requestWithPath("venues/search", parameter: parameter) {
+        client.requestWithPath("venues/search", parameter: parameter) {
             [weak self] (data, error) in
 
             let json = JSON(data: data!)
