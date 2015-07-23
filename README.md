@@ -44,9 +44,6 @@ client.requestWithPath("venues/search", parameter: parameter) {
 
 Swift 1.2 / iOS 8.0+
 
-###License
-
-The MIT License. See License.txt for details.
 
 ===========
 koogawa, July 2015.
