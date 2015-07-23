@@ -2,6 +2,8 @@
 
 Very Simple Swift wrapper for Foursquare API v2
 
+![Demo](./screen.png)
+
 ## Installation
 
 Copy all the files from the FoursquareAPIClient folder to your project.
