@@ -13,6 +13,12 @@ Copy all the files from the FoursquareAPIClient folder to your project.
 ```swift
 let client = FoursquareAPIClient(accessToken: “YOUR_ACCESS_TOKEN”)
 ```
+or
+
+```swift
+// Set v=YYYYMMDD param
+let client = FoursquareAPIClient(accessToken: “YOUR_ACCESS_TOKEN”, version: "20140723")
+```
 
 ### Search Venues
 
