@@ -45,6 +45,7 @@
 		21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoursquareAPIClient.swift; path = ../FoursquareAPIClient/FoursquareAPIClient.swift; sourceTree = "<group>"; };
 		21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareManager.swift; sourceTree = "<group>"; };
 		21D02B2B1B60B4D80030F2D7 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		21D02B2E1B60C76C0030F2D7 /* FoursquareAPIClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoursquareAPIClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		479A8A4A0187A020AB00AEED /* Pods-FoursquareAPIClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareAPIClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient.debug.xcconfig"; sourceTree = "<group>"; };
 		A1F1D2781FB0F8E9EFB4BB8D /* Pods_FoursquareAPIClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoursquareAPIClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F7DDADD4C59385E4671B30 /* Pods-FoursquareAPIClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareAPIClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 				21AAEAAE1B607EFC0067944E /* Images.xcassets */,
 				21AAEAB01B607EFC0067944E /* LaunchScreen.xib */,
 				21AAEAA51B607EFC0067944E /* Supporting Files */,
+				21D02B2E1B60C76C0030F2D7 /* FoursquareAPIClient-Bridging-Header.h */,
 			);
 			path = FoursquareAPIClient;
 			sourceTree = "<group>";
@@ -219,6 +221,7 @@
 		21AAEA9A1B607EFC0067944E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Kosuke Ogawa";
 				TargetAttributes = {
@@ -459,6 +462,7 @@
 				INFOPLIST_FILE = FoursquareAPIClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FoursquareAPIClient/FoursquareAPIClient-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -470,6 +474,7 @@
 				INFOPLIST_FILE = FoursquareAPIClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FoursquareAPIClient/FoursquareAPIClient-Bridging-Header.h";
 			};
 			name = Release;
 		};
