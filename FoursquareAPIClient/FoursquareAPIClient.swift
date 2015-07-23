@@ -3,10 +3,8 @@
 //  VenueMap
 //
 //  Created by koogawa on 2015/07/20.
-//  Copyright (c) 2015年 Kosuke Ogawa. All rights reserved.
+//  Copyright (c) 2015 Kosuke Ogawa. All rights reserved.
 //
-//  API とのネットワーク通信を抽象化。
-//  リクエストを送信して、レスポンスの JSON を NSData にして返すところまでの責任を負う。
 
 import UIKit
 
@@ -17,26 +15,29 @@ struct APIClientConstants {
 class FoursquareAPIClient: NSObject {
 
     let session: NSURLSession
+    let accessToken: String
+    let version: String
 
-    class func sharedClient() -> FoursquareAPIClient {
-
-        struct Static {
-            static let instance = FoursquareAPIClient()
-        }
-        return Static.instance
-    }
-
-    override init() {
+    init(accessToken: String, version: String = "20150723") {
 
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = [
             "Accept" : "application/json",
         ]
-        self.session = NSURLSession(configuration: configuration)
+        self.session = NSURLSession(configuration: configuration,
+            delegate: nil,
+            delegateQueue: NSOperationQueue.mainQueue())
+        self.accessToken = accessToken
+        self.version = version
         super.init()
     }
 
     func requestWithPath(path: String, parameter: [String: String], completion: ((NSData?,  NSError?) -> ())?) {
+
+        // Add necessary parameters
+        var parameter = parameter
+        parameter["oauth_token"] = self.accessToken
+        parameter["v"] = self.version
 
         let urlString = APIClientConstants.kAPIBaseURLString + path + buildQueryString(fromDictionary: parameter)
         println(urlString)
