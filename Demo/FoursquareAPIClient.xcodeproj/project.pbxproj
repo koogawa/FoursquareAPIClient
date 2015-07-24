@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21AAEAA81B607EFC0067944E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AAEAA71B607EFC0067944E /* AppDelegate.swift */; };
-		21AAEAAA1B607EFC0067944E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AAEAA91B607EFC0067944E /* ViewController.swift */; };
+		21AAEAAA1B607EFC0067944E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AAEAA91B607EFC0067944E /* MainViewController.swift */; };
 		21AAEAAD1B607EFC0067944E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21AAEAAB1B607EFC0067944E /* Main.storyboard */; };
 		21AAEAAF1B607EFC0067944E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AAEAAE1B607EFC0067944E /* Images.xcassets */; };
 		21AAEAB21B607EFC0067944E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21AAEAB01B607EFC0067944E /* LaunchScreen.xib */; };
@@ -34,7 +34,7 @@
 		21AAEAA21B607EFC0067944E /* FoursquareAPIClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoursquareAPIClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AAEAA61B607EFC0067944E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AAEAA71B607EFC0067944E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		21AAEAA91B607EFC0067944E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		21AAEAA91B607EFC0067944E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controller/MainViewController.swift; sourceTree = "<group>"; };
 		21AAEAAC1B607EFC0067944E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21AAEAAE1B607EFC0067944E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21AAEAB11B607EFC0067944E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -97,7 +97,6 @@
 				21D02B291B60B4D80030F2D7 /* Model */,
 				21D02B231B60B2E20030F2D7 /* Controller */,
 				21AAEAA71B607EFC0067944E /* AppDelegate.swift */,
-				21AAEAA91B607EFC0067944E /* ViewController.swift */,
 				21AAEAAB1B607EFC0067944E /* Main.storyboard */,
 				21AAEAAE1B607EFC0067944E /* Images.xcassets */,
 				21AAEAB01B607EFC0067944E /* LaunchScreen.xib */,
@@ -135,6 +134,7 @@
 		21D02B231B60B2E20030F2D7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				21AAEAA91B607EFC0067944E /* MainViewController.swift */,
 				21D02B241B60B34F0030F2D7 /* VenueListViewController.swift */,
 			);
 			name = Controller;
@@ -328,7 +328,7 @@
 			files = (
 				21D02B2C1B60B4D80030F2D7 /* FoursquareManager.swift in Sources */,
 				21D02B2D1B60B4D80030F2D7 /* Venue.swift in Sources */,
-				21AAEAAA1B607EFC0067944E /* ViewController.swift in Sources */,
+				21AAEAAA1B607EFC0067944E /* MainViewController.swift in Sources */,
 				21D02B251B60B34F0030F2D7 /* VenueListViewController.swift in Sources */,
 				21D02B281B60B4B00030F2D7 /* FoursquareAPIClient.swift in Sources */,
 				21AAEAA81B607EFC0067944E /* AppDelegate.swift in Sources */,

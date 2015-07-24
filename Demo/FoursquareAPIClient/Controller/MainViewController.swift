@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  FoursquareAPIClient
 //
 //  Created by koogawa on 2015/07/23.
-//  Copyright (c) 2015年 Kosuke Ogawa. All rights reserved.
+//  Copyright (c) 2015 Kosuke Ogawa. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func didReturnToMainViewController(segue: UIStoryboardSegue) {
 
+    }
 }
 
