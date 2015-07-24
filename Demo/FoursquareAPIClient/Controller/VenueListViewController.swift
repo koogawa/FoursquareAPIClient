@@ -9,7 +9,16 @@
 import UIKit
 import MapKit
 
-class VenueListViewController: UITableViewController {
+class VenueListViewController: UITableViewController, CLLocationManagerDelegate {
+
+    let locationManager = CLLocationManager()
+    var locationUpdated = false
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        locationManager.delegate = self
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +26,7 @@ class VenueListViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        let coord = CLLocationCoordinate2DMake(37.331652997806785,-122.03072304117417)
-        fetchVenues(coord)
+        locationManager.startUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,6 +49,29 @@ class VenueListViewController: UITableViewController {
 
             self?.tableView.reloadData()
         })
+    }
+
+
+    // MARK: - CLLocationManager delegate
+
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.NotDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+        if locationUpdated == true {
+            return
+        }
+
+        if !CLLocationCoordinate2DIsValid(newLocation.coordinate) {
+            return
+        }
+
+        fetchVenues(newLocation.coordinate)
+
+        locationUpdated = true
     }
 
 
