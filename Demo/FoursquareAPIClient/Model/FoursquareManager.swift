@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class FoursquareManager: NSObject {
 
+    var accessToken: String!
     var venues = [Venue]()
 
     class func sharedManager() -> FoursquareManager {
@@ -25,7 +26,7 @@ class FoursquareManager: NSObject {
 
     func searchVenuesWithCoordinate(coordinate: CLLocationCoordinate2D, completion: ((NSError?) -> ())?) {
 
-        let client = FoursquareAPIClient(accessToken: "YOUR_ACCESS_TOKEN")
+        let client = FoursquareAPIClient(accessToken: accessToken)
         
         let parameter: [String: String] = [
             "ll": "\(coordinate.latitude),\(coordinate.longitude)",
