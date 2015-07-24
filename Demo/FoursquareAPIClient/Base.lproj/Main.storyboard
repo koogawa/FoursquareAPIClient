@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="width" constant="300" id="eQ5-0c-NlC"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSh-3G-83W">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSh-3G-83W">
                                 <rect key="frame" x="225" y="64" width="150" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="iry-h5-eog"/>
@@ -33,7 +33,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="LZW1YQW5SVHEJP5JTHPWRS4MQ1MRMBVKM1B1FA2JO2YPFXHZ" translatesAutoresizingMaskIntoConstraints="NO" id="3vL-0U-A2S">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="YOUR_ACCESS_TOKEN" translatesAutoresizingMaskIntoConstraints="NO" id="3vL-0U-A2S">
                                 <rect key="frame" x="150" y="122" width="300" height="80"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
@@ -51,7 +51,7 @@
                                 </constraints>
                                 <state key="normal" title="Search Venues"/>
                                 <connections>
-                                    <segue destination="3cJ-T1-P43" kind="show" id="ZdP-dM-sTL"/>
+                                    <segue destination="3cJ-T1-P43" kind="show" identifier="ShowVenueList" id="ZdP-dM-sTL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -73,6 +73,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="tokenTextView" destination="3vL-0U-A2S" id="9Xm-bG-WWR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
