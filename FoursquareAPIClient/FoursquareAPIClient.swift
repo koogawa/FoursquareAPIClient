@@ -8,11 +8,9 @@
 
 import UIKit
 
-struct APIClientConstants {
-    static let kAPIBaseURLString: String = "https://api.foursquare.com/v2/"
-}
-
 class FoursquareAPIClient: NSObject {
+
+    private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
 
     let session: NSURLSession
     let accessToken: String
@@ -39,7 +37,7 @@ class FoursquareAPIClient: NSObject {
         parameter["oauth_token"] = self.accessToken
         parameter["v"] = self.version
 
-        let urlString = APIClientConstants.kAPIBaseURLString + path + buildQueryString(fromDictionary: parameter)
+        let urlString = kAPIBaseURLString + path + buildQueryString(fromDictionary: parameter)
         println(urlString)
 
         let request = NSURLRequest(URL: NSURL(string: urlString as String)!)
