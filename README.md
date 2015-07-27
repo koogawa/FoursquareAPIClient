@@ -40,10 +40,37 @@ client.requestWithPath("venues/search", parameter: parameter) {
 }
 ```
 
+## Authorization
+
+### Setup
+
+```
+let client = FoursquareAuthClient(clientId: “YOUR_CLIENT_ID”,
+	callback: “YOUR_CALLBACK_URL”,
+	delegate: self)
+client.authorizeWithRootViewController(self)
+```
+
+### Delegate
+
+```
+func foursquareAuthClientDidSucceed(accessToken: String) {
+    tokenTextView.text = accessToken
+}
+
+func foursquareAuthClientDidFail(error: NSError) {
+    tokenTextView.text = error.description
+}
+```
+
+
 ## Requirements
 
 Swift 1.2 / iOS 8.0+
 
+## License
+
+The MIT License. See License.txt for details.
 
 ===========
 koogawa, July 2015.
