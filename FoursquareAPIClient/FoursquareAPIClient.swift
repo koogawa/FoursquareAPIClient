@@ -38,7 +38,6 @@ class FoursquareAPIClient: NSObject {
         parameter["v"] = self.version
 
         let urlString = kAPIBaseURLString + path + buildQueryString(fromDictionary: parameter)
-        println(urlString)
 
         let request = NSURLRequest(URL: NSURL(string: urlString as String)!)
         var task = session.dataTaskWithRequest(request) {
