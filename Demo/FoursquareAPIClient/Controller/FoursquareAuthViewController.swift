@@ -53,6 +53,10 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
         self.webview?.loadRequest(NSURLRequest(URL: NSURL(string: authUrlString as String)!))
     }
 
+    override func viewDidDisappear(animated: Bool) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+
 
     // MARK: - Private methods
 
@@ -62,6 +66,14 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
 
 
     // MARK: - WKWebView delegate
+
+    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
 
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
 
@@ -73,7 +85,6 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
 
                     delegate?.foursquareAuthViewControllerDidSucceed(accessToken)
 
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     dismissViewControllerAnimated(true, completion: nil)
 
                     decisionHandler(WKNavigationActionPolicy.Cancel)
