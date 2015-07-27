@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, FoursquareAuthViewControllerDelegate {
+class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBOutlet weak var tokenTextView: UITextView!
     @IBOutlet weak var searchButton: UIButton!
@@ -31,21 +31,19 @@ class MainViewController: UIViewController, FoursquareAuthViewControllerDelegate
 
     @IBAction func didTapLoginButton(sender: AnyObject) {
         // Open auth view
-        let viewController = FoursquareAuthViewController(clientId: clientId, callback: callback)
-        viewController.delegate = self
-        let naviController = UINavigationController(rootViewController: viewController)
-        presentViewController(naviController, animated: true, completion: nil)
+        let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
+        client.authorizeWithRootViewController(self)
     }
 
 
-    // MARK: - FoursquareAuthViewControllerDelegate
+    // MARK: - FoursquareAuthClientDelegate
 
-    func foursquareAuthViewControllerDidSucceed(accessToken: String) {
+    func foursquareAuthClientDidSucceed(accessToken: String) {
         tokenTextView.text = accessToken
         searchButton.enabled = true
     }
 
-    func foursquareAuthViewControllerDidFail(error: NSError) {
+    func foursquareAuthClientDidFail(error: NSError) {
         tokenTextView.text = error.description
         searchButton.enabled = false
     }
