@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="width" constant="300" id="eQ5-0c-NlC"/>
                                 </constraints>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSh-3G-83W">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSh-3G-83W">
                                 <rect key="frame" x="225" y="64" width="150" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="iry-h5-eog"/>
@@ -32,6 +32,9 @@
                                 <state key="normal" title="Button" image="connect">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapLoginButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6q7-kM-Lec"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="YOUR_ACCESS_TOKEN" translatesAutoresizingMaskIntoConstraints="NO" id="3vL-0U-A2S">
                                 <rect key="frame" x="150" y="122" width="300" height="80"/>
@@ -43,7 +46,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M84-Ve-3Re">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M84-Ve-3Re">
                                 <rect key="frame" x="240" y="246" width="120" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Epc-fV-WUI"/>
@@ -74,12 +77,13 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="searchButton" destination="M84-Ve-3Re" id="GRv-On-KDL"/>
                         <outlet property="tokenTextView" destination="3vL-0U-A2S" id="9Xm-bG-WWR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="272" y="239"/>
+            <point key="canvasLocation" x="-523" y="995"/>
         </scene>
         <!--Venue List View Controller-->
         <scene sceneID="v2J-Aa-MRO">
