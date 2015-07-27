@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Kosuke Ogawa. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class FoursquareAPIClient: NSObject {
 
@@ -53,7 +53,7 @@ class FoursquareAPIClient: NSObject {
         task.resume()
     }
 
-    func buildQueryString(fromDictionary parameters: [String: String]) -> String {
+    private func buildQueryString(fromDictionary parameters: [String: String]) -> String {
 
         var urlVars = [String]()
         for (key, var val) in parameters {
