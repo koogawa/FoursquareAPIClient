@@ -40,8 +40,6 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
     func fetchVenues(coordinate: CLLocationCoordinate2D) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 
-        // TODO: ACCESSTOKEN渡さないと
-
         FoursquareManager.sharedManager().searchVenuesWithCoordinate(coordinate, completion: {
             [weak self] (error) in
 
