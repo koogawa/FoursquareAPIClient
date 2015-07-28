@@ -13,7 +13,7 @@ let kCategoryIconSize = 88  // pixel
 
 struct Venue: Printable {
 
-    let venueId: NSString?
+    let venueId: String?
     let name: String?
     let address: String?
     let latitude: Double?
