@@ -12,7 +12,8 @@ import MapKit
 class VenueListViewController: UITableViewController, CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
-    var locationUpdated = false
+    var userLocation: CLLocation?
+    var isLocationInitialized = false
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,17 +60,17 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
-        if locationUpdated == true {
-            return
-        }
-
+        // Guard
         if !CLLocationCoordinate2DIsValid(newLocation.coordinate) {
             return
         }
 
-        fetchVenues(newLocation.coordinate)
+        userLocation = newLocation
 
-        locationUpdated = true
+        if isLocationInitialized == false {
+            fetchVenues(newLocation.coordinate)
+            isLocationInitialized = true
+        }
     }
 
 
@@ -97,6 +98,29 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
             placeholderImage: UIImage(named: "none"))
 
         return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        if let currentLocation = userLocation {
+            let venue = FoursquareManager.sharedManager().venues[indexPath.row]
+
+            // checkin
+            FoursquareManager.sharedManager().checkinWithVenueId(venue.venueId!, location: currentLocation, completion:
+                { [weak self] json, error in
+
+                    let alert = UIAlertController(title: "Checkin success",
+                        message: json["meta"].description,
+                        preferredStyle: UIAlertControllerStyle.Alert)
+                    let cancelAction: UIAlertAction = UIAlertAction(title: "Close",
+                        style: UIAlertActionStyle.Cancel,
+                        handler: nil)
+                    alert.addAction(cancelAction)
+                    self?.presentViewController(alert, animated: true, completion: nil)
+                }
+            )
+        }
     }
 
     /*

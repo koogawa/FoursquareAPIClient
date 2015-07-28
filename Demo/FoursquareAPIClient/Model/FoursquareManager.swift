@@ -41,6 +41,26 @@ class FoursquareManager: NSObject {
         }
     }
 
+    func checkinWithVenueId(venueId: String, location: CLLocation, completion: ((JSON, NSError?) -> ())?) {
+
+        let client = FoursquareAPIClient(accessToken: accessToken)
+
+        let parameter: [String: String] = [
+            "venueId": venueId,
+            "ll": "\(location.coordinate.latitude),\(location.coordinate.longitude)",
+            "alt": "\(location.altitude)",
+        ];
+
+        client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
+            [weak self] (data, error) in
+
+            var respon = NSString(data: data!, encoding: NSUTF8StringEncoding)
+
+            let json = JSON(data: data!)
+            completion?(json, error)
+        }
+    }
+
     func parseVenues(venuesJSON: JSON) -> [Venue] {
 
         var venues = [Venue]()
