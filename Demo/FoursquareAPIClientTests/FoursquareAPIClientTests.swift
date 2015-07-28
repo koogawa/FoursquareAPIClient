@@ -3,7 +3,7 @@
 //  FoursquareAPIClientTests
 //
 //  Created by koogawa on 2015/07/23.
-//  Copyright (c) 2015年 Kosuke Ogawa. All rights reserved.
+//  Copyright (c) 2015 Kosuke Ogawa. All rights reserved.
 //
 
 import UIKit
