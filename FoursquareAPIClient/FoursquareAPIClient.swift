@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum HTTPMethod: String {
+    case GET = "GET"
+    case POST = "POST"
+}
+
 class FoursquareAPIClient: NSObject {
 
     private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
@@ -30,16 +35,27 @@ class FoursquareAPIClient: NSObject {
         super.init()
     }
 
-    func requestWithPath(path: String, parameter: [String: String], completion: ((NSData?,  NSError?) -> ())?) {
+    func requestWithPath(path: String, method: HTTPMethod = .GET, parameter: [String: String], completion: ((NSData?,  NSError?) -> ())?) {
 
         // Add necessary parameters
         var parameter = parameter
         parameter["oauth_token"] = self.accessToken
         parameter["v"] = self.version
 
-        let urlString = kAPIBaseURLString + path + buildQueryString(fromDictionary: parameter)
+        let request: NSMutableURLRequest
 
-        let request = NSURLRequest(URL: NSURL(string: urlString as String)!)
+        if method == .POST {
+            let urlString = kAPIBaseURLString + path
+            request = NSMutableURLRequest(URL: NSURL(string: urlString as String)!)
+            request.HTTPMethod = method.rawValue
+            request.HTTPBody = buildQueryString(fromDictionary: parameter).dataUsingEncoding(NSUTF8StringEncoding)
+        }
+        else {
+            let urlString = kAPIBaseURLString + path + "?" + buildQueryString(fromDictionary: parameter)
+            request = NSMutableURLRequest(URL: NSURL(string: urlString as String)!)
+            request.HTTPMethod = method.rawValue
+        }
+
         var task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
 
@@ -50,6 +66,7 @@ class FoursquareAPIClient: NSObject {
 
             completion?(data, error)
         }
+        
         task.resume()
     }
 
@@ -60,6 +77,6 @@ class FoursquareAPIClient: NSObject {
             val = val.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             urlVars += [key + "=" + "\(val)"]
         }
-        return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
+        return join("&", urlVars)
     }
 }
