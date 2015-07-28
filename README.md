@@ -40,6 +40,25 @@ client.requestWithPath("venues/search", parameter: parameter) {
 }
 ```
 
+### Check in to Venue
+
+```
+let parameter: [String: String] = [
+    "venueId": “55b731a9498eecdfbb3854a9”,
+    "ll": "37.33262674912818,-122.030451055438",
+    "alt": “10”,
+];
+
+client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
+    [weak self] (data, error) in
+
+    // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
+
+    // {"meta":{"code":200},"notifications":[{"type":"notificationTray”…
+    var response = NSString(data: data!, encoding: NSUTF8StringEncoding)
+}
+```
+
 ## Authorization
 
 ### Setup
@@ -73,4 +92,4 @@ Swift 1.2 / iOS 8.0+
 The MIT License. See License.txt for details.
 
 ===========
-koogawa, July 2015.
+[@koogawa](http://www.twitter.com/koogawa), July 2015.
