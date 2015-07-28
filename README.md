@@ -8,6 +8,10 @@ Very Simple Swift wrapper for Foursquare API v2
 
 Copy all the files from the FoursquareAPIClient folder to your project.
 
+* FoursquareAPIClient.swift
+* FoursquareAuthClient.swift (Optional)
+* FoursquareAuthViewController.swift (Optional)
+
 ## Usage
 
 ### Setup session
