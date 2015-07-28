@@ -54,8 +54,6 @@ class FoursquareManager: NSObject {
         client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
             [weak self] (data, error) in
 
-            var respon = NSString(data: data!, encoding: NSUTF8StringEncoding)
-
             let json = JSON(data: data!)
             completion?(json, error)
         }
