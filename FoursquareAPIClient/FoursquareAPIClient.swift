@@ -18,7 +18,9 @@ class FoursquareAPIClient: NSObject {
     private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
 
     let session: NSURLSession
-    let accessToken: String
+    let accessToken: String?
+    let clientId: String?
+    let clientSecret: String?
     let version: String
 
     init(accessToken: String, version: String = "20150723") {
@@ -31,6 +33,24 @@ class FoursquareAPIClient: NSObject {
             delegate: nil,
             delegateQueue: NSOperationQueue.mainQueue())
         self.accessToken = accessToken
+        self.clientId = nil
+        self.clientSecret = nil
+        self.version = version
+        super.init()
+    }
+
+    init(clientId: String, clientSecret: String, version: String = "20150723") {
+
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = [
+            "Accept" : "application/json",
+        ]
+        self.session = NSURLSession(configuration: configuration,
+            delegate: nil,
+            delegateQueue: NSOperationQueue.mainQueue())
+        self.accessToken = nil
+        self.clientId = clientId
+        self.clientSecret = clientSecret
         self.version = version
         super.init()
     }
@@ -39,7 +59,13 @@ class FoursquareAPIClient: NSObject {
 
         // Add necessary parameters
         var parameter = parameter
-        parameter["oauth_token"] = self.accessToken
+        if self.accessToken != nil {
+            parameter["oauth_token"] = self.accessToken
+        }
+        else if self.clientId != nil && self.clientSecret != nil {
+            parameter["client_id"] = self.clientId
+            parameter["client_secret"] = self.clientSecret
+        }
         parameter["v"] = self.version
 
         let request: NSMutableURLRequest
