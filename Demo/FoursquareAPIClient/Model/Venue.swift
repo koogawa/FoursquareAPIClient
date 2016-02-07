@@ -11,7 +11,7 @@ import SwiftyJSON
 
 let kCategoryIconSize = 88  // pixel
 
-struct Venue: Printable {
+struct Venue: CustomStringConvertible {
 
     let venueId: String?
     let name: String?

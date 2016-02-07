@@ -82,7 +82,7 @@ class FoursquareAPIClient: NSObject {
             request.HTTPMethod = method.rawValue
         }
 
-        var task = session.dataTaskWithRequest(request) {
+        let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
 
             if (data == nil || error != nil) {
@@ -103,6 +103,6 @@ class FoursquareAPIClient: NSObject {
             val = val.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
             urlVars += [key + "=" + "\(val)"]
         }
-        return join("&", urlVars)
+        return urlVars.joinWithSeparator("&")
     }
 }

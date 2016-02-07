@@ -16,7 +16,7 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
     var isLocationInitialized = false
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
 
         locationManager.delegate = self
     }
@@ -53,13 +53,13 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
 
     // MARK: - CLLocationManager delegate
 
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.NotDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
     }
 
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         // Guard
         if !CLLocationCoordinate2DIsValid(newLocation.coordinate) {
             return
@@ -87,13 +87,13 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("venueCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("venueCell", forIndexPath: indexPath) as UITableViewCell
         let venue = FoursquareManager.sharedManager().venues[indexPath.row]
 
         // Configure the cell...
         cell.textLabel?.text = venue.name
         cell.detailTextLabel?.text = venue.address
-        cell.imageView?.sd_cancelCurrentAnimationImagesLoad
+        cell.imageView?.sd_cancelCurrentAnimationImagesLoad()
         cell.imageView?.sd_setImageWithURL(venue.categoryIconURL,
             placeholderImage: UIImage(named: "none"))
 
