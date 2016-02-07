@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		216A64491C67881E00129C58 /* FoursquareAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */; };
 		21AAEAA81B607EFC0067944E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AAEAA71B607EFC0067944E /* AppDelegate.swift */; };
 		21AAEAAA1B607EFC0067944E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AAEAA91B607EFC0067944E /* MainViewController.swift */; };
 		21AAEAAD1B607EFC0067944E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21AAEAAB1B607EFC0067944E /* Main.storyboard */; };
@@ -19,7 +20,7 @@
 		21D02B281B60B4B00030F2D7 /* FoursquareAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */; };
 		21D02B2C1B60B4D80030F2D7 /* FoursquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */; };
 		21D02B2D1B60B4D80030F2D7 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B2B1B60B4D80030F2D7 /* Venue.swift */; };
-		CD2E0F439057D4AA80BC677F /* Pods_FoursquareAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F1D2781FB0F8E9EFB4BB8D /* Pods_FoursquareAPIClient.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CD2E0F439057D4AA80BC677F /* Pods_FoursquareAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F1D2781FB0F8E9EFB4BB8D /* Pods_FoursquareAPIClient.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,7 +229,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Kosuke Ogawa";
 				TargetAttributes = {
 					21AAEAA11B607EFC0067944E = {
@@ -347,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				216A64491C67881E00129C58 /* FoursquareAPIClient.swift in Sources */,
 				21AAEABE1B607EFC0067944E /* FoursquareAPIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +404,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -469,6 +472,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FoursquareAPIClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.koogawa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FoursquareAPIClient/FoursquareAPIClient-Bridging-Header.h";
 			};
@@ -481,6 +485,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FoursquareAPIClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.koogawa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FoursquareAPIClient/FoursquareAPIClient-Bridging-Header.h";
 			};
@@ -490,16 +495,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = FoursquareAPIClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.koogawa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FoursquareAPIClient.app/FoursquareAPIClient";
 			};
@@ -509,12 +512,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FoursquareAPIClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.koogawa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FoursquareAPIClient.app/FoursquareAPIClient";
 			};

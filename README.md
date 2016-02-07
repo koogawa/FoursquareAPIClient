@@ -1,10 +1,28 @@
 # FoursquareAPIClient
 
-Very Simple Swift wrapper for Foursquare API v2
+![](https://img.shields.io/cocoapods/v/FoursquareAPIClient.svg?style=flat)
+
+`FoursquareAPIClient` is very simple Swift networking library for Foursquare API v2.
 
 ![Demo](./screen.png)
 
 ## Installation
+
+### From CocoaPods
+
+First, add the following line to your [Podfile](http://guides.cocoapods.org/using/using-cocoapods.html):
+
+```ruby
+pod 'FoursquareAPIClient'
+```
+
+Second, install `FoursquareAPIClient` into your project:
+
+```ruby
+pod install
+```
+
+### Manually
 
 Copy all the files from the FoursquareAPIClient folder to your project.
 
@@ -102,11 +120,11 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 1.2 / iOS 8.0+
+Swift 2.1 / iOS 8.0+
 
 ## License
 
 The MIT License. See License.txt for details.
 
 ===========
-[@koogawa](http://www.twitter.com/koogawa), July 2015.
+[@koogawa](http://www.twitter.com/koogawa), February 2016.

@@ -52,7 +52,7 @@ class FoursquareManager: NSObject {
         ];
 
         client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
-            [weak self] (data, error) in
+            (data, error) in
 
             let json = JSON(data: data!)
             completion?(json, error)
@@ -63,8 +63,8 @@ class FoursquareManager: NSObject {
 
         var venues = [Venue]()
 
-        for (key: String, venueJSON: JSON) in venuesJSON {
-            venues.append(Venue(json: venueJSON))
+        for (key: _, venueJSON: JSON) in venuesJSON {
+            venues.append(Venue(json: JSON))
         }
 
         return venues

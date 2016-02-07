@@ -22,8 +22,29 @@ class FoursquareAPIClientTests: XCTestCase {
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        let client = FoursquareAPIClient(accessToken: "accessToken")
+        XCTAssertTrue(client.isKindOfClass(FoursquareAPIClient), "FoursquareAPIClient")
+
+        let parameter: [String: String] = [
+            "ll": "\(37.33262674912818),\(-122.030451055438)",
+        ];
+
+        let expectation = expectationWithDescription("venues/search")
+
+        client.requestWithPath("venues/search", parameter: parameter) {
+            (data, error) in
+
+            XCTAssertNotNil(data, "data should not be nil")
+            XCTAssertNil(error, "error should be nil")
+
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1.0) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
     
     func testPerformanceExample() {
