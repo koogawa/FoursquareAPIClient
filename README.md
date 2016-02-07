@@ -1,6 +1,6 @@
 # FoursquareAPIClient
 
-Very Simple Swift wrapper for Foursquare API v2
+FoursquareAPIClient is very simple Swift networking library for Foursquare API v2.
 
 ![Demo](./screen.png)
 
