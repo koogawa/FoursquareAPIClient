@@ -118,11 +118,11 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 1.2 / iOS 8.0+
+Swift 2.1 / iOS 8.0+
 
 ## License
 
 The MIT License. See License.txt for details.
 
 ===========
-[@koogawa](http://www.twitter.com/koogawa), July 2015.
+[@koogawa](http://www.twitter.com/koogawa), February 2016.
