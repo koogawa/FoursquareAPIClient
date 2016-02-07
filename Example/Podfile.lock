@@ -5,8 +5,8 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - SDWebImage
-  - SwiftyJSON
+  - SDWebImage (= 3.7.5)
+  - SwiftyJSON (= 2.3.2)
 
 SPEC CHECKSUMS:
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
