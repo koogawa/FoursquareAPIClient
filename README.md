@@ -1,6 +1,6 @@
 # FoursquareAPIClient
 
-![](https://img.shields.io/cocoapods/v/FoursquareAPIClient.svg?style=flat)
+[![Build Status](https://www.bitrise.io/app/b220011d79899255.svg?token=Qq5QKCXCQgLZdEHECb1jOQ&branch=master)](https://www.bitrise.io/app/b220011d79899255) ![](https://img.shields.io/cocoapods/v/FoursquareAPIClient.svg?style=flat)
 
 `FoursquareAPIClient` is very simple Swift networking library for Foursquare API v2.
 
