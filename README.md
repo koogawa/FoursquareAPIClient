@@ -6,6 +6,22 @@ FoursquareAPIClient is very simple Swift networking library for Foursquare API v
 
 ## Installation
 
+### From CocoaPods
+
+First, add the following line to your [Podfile](http://guides.cocoapods.org/using/using-cocoapods.html):
+
+```ruby
+pod 'FoursquareAPIClient'
+```
+
+Second, install `FoursquareAPIClient` into your project:
+
+```ruby
+pod install
+```
+
+### Manually
+
 Copy all the files from the FoursquareAPIClient folder to your project.
 
 * FoursquareAPIClient.swift
