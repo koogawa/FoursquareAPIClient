@@ -1,15 +1,15 @@
 PODS:
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
-  - SwiftyJSON (2.2.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - SDWebImage
-  - SwiftyJSON (~> 2.2.0)
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.38.0
+COCOAPODS: 0.39.0
