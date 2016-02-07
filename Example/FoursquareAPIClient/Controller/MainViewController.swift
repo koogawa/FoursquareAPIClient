@@ -13,8 +13,8 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
     @IBOutlet weak var tokenTextView: UITextView!
     @IBOutlet weak var searchButton: UIButton!
 
-    let clientId = "(YOUR_CLIENT_ID)"
-    let callback = "(YOUR_CALLBACK_URL)"
+    let clientId = "IOWXRNZELRG22C0L0EKCWCAFL5GEQPFJ3ANNZJFSRCCBRGXZ"
+    let callback = "http://www.example.com/"
 
     override func viewDidLoad() {
         super.viewDidLoad()
