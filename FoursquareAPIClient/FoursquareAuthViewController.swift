@@ -39,7 +39,7 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
         // Cancel button
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel,
             target: self,
-            action: "cancelButtonDidTap:")
+            action: #selector(self.cancelButtonDidTap(_:)))
         navigationItem.leftBarButtonItem = cancelButton
 
         // WKWebView
