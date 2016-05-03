@@ -54,7 +54,8 @@ let client = FoursquareAPIClient(accessToken: "YOUR_ACCESS_TOKEN", version: "201
 or
 
 ```swift
-let client = FoursquareAPIClient(clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET”, version: "20140723”)
+let client = FoursquareAPIClient(clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET”,
+                                  version: "20140723”)
 ```
 
 ## Search Venues
@@ -84,12 +85,12 @@ let parameter: [String: String] = [
     "alt": "10”,
 ];
 
-client.r"questWithPath("checkins/add", method: .POST, parameter: parameter) {
+client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
     [weak self] (data, error) in
 
     // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
 
-    // {"meta":{"code":200},"notifications":[{"type":"notificationTray”…
+    // {"meta":{"code":200},"notifications":[{"type":"notificationTray"…
     var response = NSString(data: data!, encoding: NSUTF8StringEncoding)
 }
 ```
@@ -99,10 +100,9 @@ client.r"questWithPath("checkins/add", method: .POST, parameter: parameter) {
 ### Setup
 
 ```
-let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID”,
-"callback: "YOUR_CALLBACK_URL",
-	delegate: self)
-client.authorizeWithRootViewController(self)
+let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
+                                  callback: "YOUR_CALLBACK_URL",
+                                  delegate: self)
 ```
 
 ### Delegate
