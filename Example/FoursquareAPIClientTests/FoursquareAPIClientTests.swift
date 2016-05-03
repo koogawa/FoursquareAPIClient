@@ -23,7 +23,7 @@ class FoursquareAPIClientTests: XCTestCase {
     
     func testExample() {
         let client = FoursquareAPIClient(accessToken: "accessToken")
-        XCTAssertTrue(client.isKindOfClass(FoursquareAPIClient), "FoursquareAPIClient")
+        XCTAssertNotNil(client, "FoursquareAPIClient should not be nil")
 
         let parameter: [String: String] = [
             "ll": "\(37.33262674912818),\(-122.030451055438)",
