@@ -32,10 +32,16 @@ Copy all the files from the FoursquareAPIClient folder to your project.
 
 ## Usage
 
+### Import
+
+```swift
+import FoursquareAPIClient
+```
+
 ### Setup session
 
 ```swift
-let client = FoursquareAPIClient(accessToken: “YOUR_ACCESS_TOKEN”)
+let client = FoursquareAPIClient(accessToken: "YOUR_ACCESS_TOKEN")
 ```
 
 or
@@ -48,16 +54,17 @@ let client = FoursquareAPIClient(clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR
 
 ```swift
 // Set v=YYYYMMDD param
-let client = FoursquareAPIClient(accessToken: “YOUR_ACCESS_TOKEN”, version: "20140723")
+let client = FoursquareAPIClient(accessToken: "YOUR_ACCESS_TOKEN", version: "20140723")
 ```
 
 or
 
 ```swift
-let client = FoursquareAPIClient(clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET”, version: “20140723”)
+let client = FoursquareAPIClient(clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET”,
+                                  version: "20140723”)
 ```
 
-### Search Venues
+## Search Venues
 
 ```swift
 let parameter: [String: String] = [
@@ -71,7 +78,7 @@ client.requestWithPath("venues/search", parameter: parameter) {
     // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
 
     // result: {"meta":{"code":200},"notifications":[{"...
-    println(NSString(data: data!, encoding: NSUTF8StringEncoding))
+    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
 }
 ```
 
@@ -79,9 +86,9 @@ client.requestWithPath("venues/search", parameter: parameter) {
 
 ```
 let parameter: [String: String] = [
-    "venueId": “55b731a9498eecdfbb3854a9”,
+    "venueId": "55b731a9498eecdfb"3854a9”,
     "ll": "37.33262674912818,-122.030451055438",
-    "alt": “10”,
+    "alt": "10”,
 ];
 
 client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
@@ -89,7 +96,7 @@ client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
 
     // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
 
-    // {"meta":{"code":200},"notifications":[{"type":"notificationTray”…
+    // {"meta":{"code":200},"notifications":[{"type":"notificationTray"…
     var response = NSString(data: data!, encoding: NSUTF8StringEncoding)
 }
 ```
@@ -99,32 +106,33 @@ client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
 ### Setup
 
 ```
-let client = FoursquareAuthClient(clientId: “YOUR_CLIENT_ID”,
-	callback: “YOUR_CALLBACK_URL”,
-	delegate: self)
-client.authorizeWithRootViewController(self)
+let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
+                                  callback: "YOUR_CALLBACK_URL",
+                                  delegate: self)
 ```
 
 ### Delegate
 
 ```
 func foursquareAuthClientDidSucceed(accessToken: String) {
-    tokenTextView.text = accessToken
+    print(accessToken)
 }
 
 func foursquareAuthClientDidFail(error: NSError) {
-    tokenTextView.text = error.description
+    print(error.description)
 }
 ```
 
 
 ## Requirements
 
-Swift 2.1 / iOS 8.0+
+Swift 2.2 / iOS 8.0+
+
+## Creator
+
+[Kosuke Ogawa](http://www.twitter.com/koogawa)
 
 ## License
 
 The MIT License. See License.txt for details.
 
-===========
-[@koogawa](http://www.twitter.com/koogawa), February 2016.
