@@ -13,18 +13,17 @@ public enum HTTPMethod: String {
     case POST = "POST"
 }
 
-class FoursquareAPIClient: NSObject {
+public class FoursquareAPIClient {
 
     private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
 
-    let session: NSURLSession
+    var session: NSURLSession
     let accessToken: String?
     let clientId: String?
     let clientSecret: String?
     let version: String
 
-    init(accessToken: String, version: String = "20150723") {
-
+    public init(accessToken: String, version: String = "20150723") {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = [
             "Accept" : "application/json",
@@ -36,10 +35,9 @@ class FoursquareAPIClient: NSObject {
         self.clientId = nil
         self.clientSecret = nil
         self.version = version
-        super.init()
     }
 
-    init(clientId: String, clientSecret: String, version: String = "20150723") {
+    public init(clientId: String, clientSecret: String, version: String = "20150723") {
 
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = [
@@ -52,11 +50,12 @@ class FoursquareAPIClient: NSObject {
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.version = version
-        super.init()
     }
 
-    func requestWithPath(path: String, method: HTTPMethod = .GET, parameter: [String: String], completion: ((NSData?,  NSError?) -> ())?) {
-
+    public func requestWithPath(path: String,
+                                method: HTTPMethod = .GET,
+                                parameter: [String: String],
+                                completion: ((NSData?,  NSError?) -> ())?) {
         // Add necessary parameters
         var parameter = parameter
         if self.accessToken != nil {

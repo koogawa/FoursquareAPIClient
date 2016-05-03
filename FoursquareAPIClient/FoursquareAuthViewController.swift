@@ -14,7 +14,7 @@ import WebKit
     optional func foursquareAuthViewControllerDidFail(error: NSError)
 }
 
-class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
+class FoursquareAuthViewController: UIViewController {
 
     private let kFoursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
 
@@ -39,7 +39,7 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
         // Cancel button
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel,
             target: self,
-            action: "cancelButtonDidTap:")
+            action: #selector(FoursquareAuthViewController.cancelButtonDidTap(_:)))
         navigationItem.leftBarButtonItem = cancelButton
 
         // WKWebView
@@ -57,15 +57,16 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
-
     // MARK: - Private methods
 
     func cancelButtonDidTap(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+}
 
+// MARK: - WKWebView delegate
 
-    // MARK: - WKWebView delegate
+extension FoursquareAuthViewController: WKNavigationDelegate {
 
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -80,15 +81,15 @@ class FoursquareAuthViewController: UIViewController, WKNavigationDelegate {
         if let urlString = navigationAction.request.URL?.absoluteString
             where urlString.rangeOfString("access_token=") != nil {
 
-                // Auth Success
-                if let accessToken = urlString.componentsSeparatedByString("=").last {
+            // Auth Success
+            if let accessToken = urlString.componentsSeparatedByString("=").last {
 
-                    delegate?.foursquareAuthViewControllerDidSucceed(accessToken)
+                delegate?.foursquareAuthViewControllerDidSucceed(accessToken)
 
-                    dismissViewControllerAnimated(true, completion: nil)
+                dismissViewControllerAnimated(true, completion: nil)
 
-                    decisionHandler(WKNavigationActionPolicy.Cancel)
-                }
+                decisionHandler(WKNavigationActionPolicy.Cancel)
+            }
         }
 
         decisionHandler(WKNavigationActionPolicy.Allow)
