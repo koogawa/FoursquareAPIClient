@@ -32,6 +32,12 @@ Copy all the files from the FoursquareAPIClient folder to your project.
 
 ## Usage
 
+### Import
+
+```swift
+import FoursquareAPIClient
+```
+
 ### Setup session
 
 ```swift
@@ -72,7 +78,7 @@ client.requestWithPath("venues/search", parameter: parameter) {
     // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
 
     // result: {"meta":{"code":200},"notifications":[{"...
-    println(NSString(data: data!, encoding: NSUTF8StringEncoding))
+    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
 }
 ```
 
@@ -109,11 +115,11 @@ let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
 
 ```
 func foursquareAuthClientDidSucceed(accessToken: String) {
-    tokenTextView.text = accessToken
+    print(accessToken)
 }
 
 func foursquareAuthClientDidFail(error: NSError) {
-    tokenTextView.text = error.description
+    print(error.description)
 }
 ```
 
