@@ -48,9 +48,19 @@ class FoursquareAuthViewController: UIViewController {
         self.webview.navigationDelegate = self
         self.view.addSubview(self.webview!)
 
+        // Encode URL
+        let authURLString = NSString(format: kFoursquareAuthUrlFormat, self.clientId, self.callback)
+        guard let encodedURLString = authURLString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) else {
+            print("Invalid URL: ", authURLString)
+            return
+        }
+
         // Load auth url
-        let authUrlString = NSString(format: kFoursquareAuthUrlFormat, clientId, callback)
-        self.webview?.loadRequest(NSURLRequest(URL: NSURL(string: authUrlString as String)!))
+        guard let authURL = NSURL(string: encodedURLString) else {
+            print("Invalid URL: ", authURLString)
+            return
+        }
+        self.webview?.loadRequest(NSURLRequest(URL: authURL))
     }
 
     override func viewDidDisappear(animated: Bool) {
