@@ -28,9 +28,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'FoursquareAPIClient/*.swift'
-  s.resource_bundles = {
-    'FoursquareAPIClient' => ['Pod/Assets/*.png']
-  }
+  # s.resource_bundles = {
+  #   'FoursquareAPIClient' => ['Pod/Assets/*.png']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
