@@ -88,8 +88,8 @@ extension FoursquareAuthViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
 
-        if let urlString = navigationAction.request.url?.absoluteString
-            where urlString.range(of: "access_token=") != nil {
+        if let urlString = navigationAction.request.url?.absoluteString,
+            urlString.range(of: "access_token=") != nil {
 
             // Auth Success
             if let accessToken = urlString.components(separatedBy: "=").last {

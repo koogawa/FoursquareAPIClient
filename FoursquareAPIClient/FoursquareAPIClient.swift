@@ -23,7 +23,7 @@ public class FoursquareAPIClient {
     let clientSecret: String?
     let version: String
 
-    public init(accessToken: String, version: String = "20150723") {
+    public init(accessToken: String, version: String = "20160813") {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = [
             "Accept" : "application/json",
@@ -37,7 +37,7 @@ public class FoursquareAPIClient {
         self.version = version
     }
 
-    public init(clientId: String, clientSecret: String, version: String = "20150723") {
+    public init(clientId: String, clientSecret: String, version: String = "20160813") {
 
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = [
@@ -52,6 +52,7 @@ public class FoursquareAPIClient {
         self.version = version
     }
 
+    // FIXME: REMOVE _
     public func requestWithPath(_ path: String,
                                 method: HTTPMethod = .GET,
                                 parameter: [String: String],
@@ -81,16 +82,17 @@ public class FoursquareAPIClient {
             request.httpMethod = method.rawValue
         }
 
-        let task = session.dataTask(with: request) {
-            (data, response, error) -> Void in
+        let task = self.session.dataTask(with: request as URLRequest, completionHandler: {
+            (data, response, error) in
 
+            // fixme: nil check?
             if (data == nil || error != nil) {
                 completion?(nil, error)
                 return
             }
 
             completion?(data, error)
-        }
+        })
         
         task.resume()
     }
