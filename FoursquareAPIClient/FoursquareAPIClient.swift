@@ -9,19 +9,19 @@
 import Foundation
 
 public enum HTTPMethod: String {
-    case GET = "GET"
-    case POST = "POST"
+    case get = "GET"
+    case post = "POST"
 }
 
 public class FoursquareAPIClient {
 
     private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
 
-    var session: URLSession
-    let accessToken: String?
-    let clientId: String?
-    let clientSecret: String?
-    let version: String
+    private var session: URLSession
+    private let accessToken: String?
+    private let clientId: String?
+    private let clientSecret: String?
+    private let version: String
 
     public init(accessToken: String, version: String = "20160813") {
         let configuration = URLSessionConfiguration.default
@@ -38,7 +38,6 @@ public class FoursquareAPIClient {
     }
 
     public init(clientId: String, clientSecret: String, version: String = "20160813") {
-
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = [
             "Accept" : "application/json",
@@ -52,41 +51,45 @@ public class FoursquareAPIClient {
         self.version = version
     }
 
-    // FIXME: REMOVE _
-    public func requestWithPath(_ path: String,
-                                method: HTTPMethod = .GET,
-                                parameter: [String: String],
-                                completion: ((Data?,  NSError?) -> ())?) {
+    public func request(path: String,
+                        method: HTTPMethod = .get,
+                        parameter: [String: String],
+                        completion: ((Data?,  NSError?) -> ())?) {
         // Add necessary parameters
         var parameter = parameter
-        if self.accessToken != nil {
-            parameter["oauth_token"] = self.accessToken
-        }
-        else if self.clientId != nil && self.clientSecret != nil {
-            parameter["client_id"] = self.clientId
-            parameter["client_secret"] = self.clientSecret
+        if let accessToken = self.accessToken {
+            parameter["oauth_token"] = accessToken
+        } else if let clientId = self.clientId, let clientSecret = self.clientSecret {
+            parameter["client_id"] = clientId
+            parameter["client_secret"] = clientSecret
         }
         parameter["v"] = self.version
 
         let request: NSMutableURLRequest
 
-        if method == .POST {
+        if method == .post {
             let urlString = kAPIBaseURLString + path
-            request = NSMutableURLRequest(url: URL(string: urlString as String)!)
+            guard let url = URL(string: urlString as String) else {
+                print("Invalid URL: ", urlString)
+                return
+            }
+            request = NSMutableURLRequest(url: url)
             request.httpMethod = method.rawValue
             request.httpBody = buildQueryString(fromDictionary: parameter).data(using: String.Encoding.utf8)
-        }
-        else {
+        } else {
             let urlString = kAPIBaseURLString + path + "?" + buildQueryString(fromDictionary: parameter)
-            request = NSMutableURLRequest(url: URL(string: urlString as String)!)
+            guard let url = URL(string: urlString as String) else {
+                print("Invalid URL: ", urlString)
+                return
+            }
+            request = NSMutableURLRequest(url: url)
             request.httpMethod = method.rawValue
         }
 
         let task = self.session.dataTask(with: request as URLRequest, completionHandler: {
-            (data, response, error) in
+            data, _, error in
 
-            // fixme: nil check?
-            if (data == nil || error != nil) {
+            if let error = error {
                 completion?(nil, error)
                 return
             }
@@ -98,11 +101,11 @@ public class FoursquareAPIClient {
     }
 
     private func buildQueryString(fromDictionary parameters: [String: String]) -> String {
-
         var urlVars = [String]()
-        for (key, var val) in parameters {
-            val = val.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-            urlVars += [key + "=" + "\(val)"]
+        for (key, val) in parameters {
+            if let val = val.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
+                urlVars += [key + "=" + "\(val)"]
+            }
         }
         return urlVars.joined(separator: "&")
     }

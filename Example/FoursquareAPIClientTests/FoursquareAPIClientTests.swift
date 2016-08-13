@@ -26,12 +26,13 @@ class FoursquareAPIClientTests: XCTestCase {
         XCTAssertNotNil(client, "FoursquareAPIClient should not be nil")
 
         let parameter: [String: String] = [
+            "query": "Apple",
             "ll": "\(37.33262674912818),\(-122.030451055438)",
         ];
 
         let expectation = self.expectation(description: "venues/search")
 
-        client.requestWithPath("venues/search", parameter: parameter) {
+        client.request(path: "venues/search", method: .get, parameter: parameter) {
             (data, error) in
 
             XCTAssertNotNil(data, "data should not be nil")
