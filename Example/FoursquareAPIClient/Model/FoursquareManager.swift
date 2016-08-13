@@ -24,7 +24,7 @@ class FoursquareManager: NSObject {
         return Static.instance
     }
 
-    func searchVenuesWithCoordinate(coordinate: CLLocationCoordinate2D, completion: ((NSError?) -> ())?) {
+    func searchVenuesWithCoordinate(_ coordinate: CLLocationCoordinate2D, completion: ((NSError?) -> ())?) {
 
         let client = FoursquareAPIClient(accessToken: accessToken)
         
@@ -41,7 +41,7 @@ class FoursquareManager: NSObject {
         }
     }
 
-    func checkinWithVenueId(venueId: String, location: CLLocation, completion: ((JSON, NSError?) -> ())?) {
+    func checkinWithVenueId(_ venueId: String, location: CLLocation, completion: ((JSON, NSError?) -> ())?) {
 
         let client = FoursquareAPIClient(accessToken: accessToken)
 
@@ -59,7 +59,7 @@ class FoursquareManager: NSObject {
         }
     }
 
-    func parseVenues(venuesJSON: JSON) -> [Venue] {
+    func parseVenues(_ venuesJSON: JSON) -> [Venue] {
 
         var venues = [Venue]()
 

@@ -18,7 +18,7 @@ struct Venue: CustomStringConvertible {
     let address: String?
     let latitude: Double?
     let longitude: Double?
-    let categoryIconURL: NSURL?
+    let categoryIconURL: URL?
 
     var description: String {
         return "<venueId=\(venueId)"

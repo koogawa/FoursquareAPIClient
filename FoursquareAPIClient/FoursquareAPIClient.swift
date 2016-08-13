@@ -17,20 +17,20 @@ public class FoursquareAPIClient {
 
     private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
 
-    var session: NSURLSession
+    var session: URLSession
     let accessToken: String?
     let clientId: String?
     let clientSecret: String?
     let version: String
 
     public init(accessToken: String, version: String = "20150723") {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.HTTPAdditionalHeaders = [
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = [
             "Accept" : "application/json",
         ]
-        self.session = NSURLSession(configuration: configuration,
+        self.session = URLSession(configuration: configuration,
             delegate: nil,
-            delegateQueue: NSOperationQueue.mainQueue())
+            delegateQueue: OperationQueue.main)
         self.accessToken = accessToken
         self.clientId = nil
         self.clientSecret = nil
@@ -39,23 +39,23 @@ public class FoursquareAPIClient {
 
     public init(clientId: String, clientSecret: String, version: String = "20150723") {
 
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.HTTPAdditionalHeaders = [
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = [
             "Accept" : "application/json",
         ]
-        self.session = NSURLSession(configuration: configuration,
+        self.session = URLSession(configuration: configuration,
             delegate: nil,
-            delegateQueue: NSOperationQueue.mainQueue())
+            delegateQueue: OperationQueue.main)
         self.accessToken = nil
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.version = version
     }
 
-    public func requestWithPath(path: String,
+    public func requestWithPath(_ path: String,
                                 method: HTTPMethod = .GET,
                                 parameter: [String: String],
-                                completion: ((NSData?,  NSError?) -> ())?) {
+                                completion: ((Data?,  NSError?) -> ())?) {
         // Add necessary parameters
         var parameter = parameter
         if self.accessToken != nil {
@@ -71,17 +71,17 @@ public class FoursquareAPIClient {
 
         if method == .POST {
             let urlString = kAPIBaseURLString + path
-            request = NSMutableURLRequest(URL: NSURL(string: urlString as String)!)
-            request.HTTPMethod = method.rawValue
-            request.HTTPBody = buildQueryString(fromDictionary: parameter).dataUsingEncoding(NSUTF8StringEncoding)
+            request = NSMutableURLRequest(url: URL(string: urlString as String)!)
+            request.httpMethod = method.rawValue
+            request.httpBody = buildQueryString(fromDictionary: parameter).data(using: String.Encoding.utf8)
         }
         else {
             let urlString = kAPIBaseURLString + path + "?" + buildQueryString(fromDictionary: parameter)
-            request = NSMutableURLRequest(URL: NSURL(string: urlString as String)!)
-            request.HTTPMethod = method.rawValue
+            request = NSMutableURLRequest(url: URL(string: urlString as String)!)
+            request.httpMethod = method.rawValue
         }
 
-        let task = session.dataTaskWithRequest(request) {
+        let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
 
             if (data == nil || error != nil) {
@@ -99,9 +99,9 @@ public class FoursquareAPIClient {
 
         var urlVars = [String]()
         for (key, var val) in parameters {
-            val = val.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            val = val.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
             urlVars += [key + "=" + "\(val)"]
         }
-        return urlVars.joinWithSeparator("&")
+        return urlVars.joined(separator: "&")
     }
 }

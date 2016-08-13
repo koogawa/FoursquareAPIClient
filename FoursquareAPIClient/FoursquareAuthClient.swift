@@ -9,8 +9,8 @@
 import Foundation
 
 @objc public protocol FoursquareAuthClientDelegate {
-    func foursquareAuthClientDidSucceed(accessToken: String)
-    optional func foursquareAuthClientDidFail(error: NSError)
+    func foursquareAuthClientDidSucceed(_ accessToken: String)
+    @objc optional func foursquareAuthClientDidFail(_ error: NSError)
 }
 
 public class FoursquareAuthClient: NSObject {
@@ -25,11 +25,11 @@ public class FoursquareAuthClient: NSObject {
         self.delegate = delegate
     }
 
-    public func authorizeWithRootViewController(controller: UIViewController) {
+    public func authorizeWithRootViewController(_ controller: UIViewController) {
         let viewController = FoursquareAuthViewController(clientId: clientId, callback: callback)
         viewController.delegate = self
         let naviController = UINavigationController(rootViewController: viewController)
-        controller.presentViewController(naviController, animated: true, completion: nil)
+        controller.present(naviController, animated: true, completion: nil)
     }
 }
 
@@ -37,11 +37,11 @@ public class FoursquareAuthClient: NSObject {
 
 extension FoursquareAuthClient: FoursquareAuthViewControllerDelegate {
 
-    func foursquareAuthViewControllerDidSucceed(accessToken: String) {
+    func foursquareAuthViewControllerDidSucceed(_ accessToken: String) {
         delegate.foursquareAuthClientDidSucceed(accessToken)
     }
 
-    func foursquareAuthViewControllerDidFail(error: NSError) {
+    func foursquareAuthViewControllerDidFail(_ error: NSError) {
         delegate.foursquareAuthClientDidFail?(error)
     }
 }
