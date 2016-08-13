@@ -10,18 +10,17 @@ import UIKit
 import WebKit
 
 @objc protocol FoursquareAuthViewControllerDelegate {
-    func foursquareAuthViewControllerDidSucceed(_ accessToken: String)
-    @objc optional func foursquareAuthViewControllerDidFail(_ error: NSError)
+    func foursquareAuthViewControllerDidSucceed(accessToken: String)
+    @objc optional func foursquareAuthViewControllerDidFail(error: NSError)
 }
 
 class FoursquareAuthViewController: UIViewController {
-
     private let kFoursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
 
     var webview: WKWebView!
     var clientId: String
     var callback: String
-    var delegate: FoursquareAuthViewControllerDelegate! = nil
+    var delegate: FoursquareAuthViewControllerDelegate? = nil
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -60,7 +59,7 @@ class FoursquareAuthViewController: UIViewController {
             print("Invalid URL: ", authURLString)
             return
         }
-        self.webview?.load(URLRequest(url: authURL))
+        _ = self.webview?.load(URLRequest(url: authURL))
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -77,7 +76,6 @@ class FoursquareAuthViewController: UIViewController {
 // MARK: - WKWebView delegate
 
 extension FoursquareAuthViewController: WKNavigationDelegate {
-
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
@@ -94,7 +92,7 @@ extension FoursquareAuthViewController: WKNavigationDelegate {
             // Auth Success
             if let accessToken = urlString.components(separatedBy: "=").last {
 
-                delegate?.foursquareAuthViewControllerDidSucceed(accessToken)
+                delegate?.foursquareAuthViewControllerDidSucceed(accessToken: accessToken)
 
                 dismiss(animated: true, completion: nil)
 
@@ -108,6 +106,6 @@ extension FoursquareAuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // Auth failed
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        delegate?.foursquareAuthViewControllerDidFail?(error)
+        delegate?.foursquareAuthViewControllerDidFail?(error: error)
     }
 }
