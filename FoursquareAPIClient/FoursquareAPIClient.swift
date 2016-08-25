@@ -54,7 +54,7 @@ public class FoursquareAPIClient {
     public func request(path: String,
                         method: HTTPMethod = .get,
                         parameter: [String: String],
-                        completion: ((Data?,  NSError?) -> ())?) {
+                        completion: ((Data?,  Error?) -> ())?) {
         // Add necessary parameters
         var parameter = parameter
         if let accessToken = self.accessToken {
