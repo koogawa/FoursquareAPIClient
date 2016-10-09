@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "FoursquareAPIClient"
-  s.version          = "0.1.0"
+  s.version          = "1.0.1"
   s.summary          = "Very simple Swift networking library for Foursquare API v2"
 
 # This description is used to generate tags and improve search results.
@@ -28,9 +28,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'FoursquareAPIClient/*.swift'
-  s.resource_bundles = {
-    'FoursquareAPIClient' => ['Pod/Assets/*.png']
-  }
+  # s.resource_bundles = {
+  #   'FoursquareAPIClient' => ['Pod/Assets/*.png']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
