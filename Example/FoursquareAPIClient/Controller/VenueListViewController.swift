@@ -59,13 +59,13 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        // Guard
-        if !CLLocationCoordinate2DIsValid(newLocation.coordinate) {
-            return
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let newLocation = locations.last,
+            CLLocationCoordinate2DIsValid(newLocation.coordinate) else {
+                return
         }
 
-        userLocation = newLocation
+        self.userLocation = newLocation
 
         if isLocationInitialized == false {
             fetchVenues(newLocation.coordinate)
@@ -110,14 +110,14 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
             FoursquareManager.sharedManager().checkinWithVenueId(venue.venueId!, location: currentLocation, completion:
                 { [weak self] json, error in
 
-                    let alert = UIAlertController(title: "Checkin success",
+                    let alertController = UIAlertController(title: "Checkin success",
                         message: json["meta"].description,
-                        preferredStyle: UIAlertControllerStyle.Alert)
+                        preferredStyle: UIAlertControllerStyle.alert)
                     let cancelAction: UIAlertAction = UIAlertAction(title: "Close",
-                        style: UIAlertActionStyle.Cancel,
+                        style: UIAlertActionStyle.cancel,
                         handler: nil)
-                    alert.addAction(cancelAction)
-                    self?.presentViewController(alert, animated: true, completion: nil)
+                    alertController.addAction(cancelAction)
+                    self?.present(alertController, animated: true, completion: nil)
                 }
             )
         }

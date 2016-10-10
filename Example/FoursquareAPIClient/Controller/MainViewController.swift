@@ -38,20 +38,20 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     // MARK: - FoursquareAuthClientDelegate
 
-    func foursquareAuthClientDidSucceed(_ accessToken: String) {
+    func foursquareAuthClientDidSucceed(accessToken: String) {
         tokenTextView.text = accessToken
         searchButton.isEnabled = true
     }
 
-    func foursquareAuthClientDidFail(_ error: NSError) {
-        tokenTextView.text = error.description
+    func foursquareAuthClientDidFail(error: Error) {
+        tokenTextView.text = error.localizedDescription
         searchButton.isEnabled = false
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         if segue.identifier == "ShowVenueList" {

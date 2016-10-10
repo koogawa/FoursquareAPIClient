@@ -10,7 +10,7 @@ import Foundation
 
 @objc public protocol FoursquareAuthClientDelegate {
     func foursquareAuthClientDidSucceed(accessToken: String)
-    @objc optional func foursquareAuthClientDidFail(error: NSError)
+    @objc optional func foursquareAuthClientDidFail(error: Error)
 }
 
 public class FoursquareAuthClient: NSObject {
@@ -41,7 +41,7 @@ extension FoursquareAuthClient: FoursquareAuthViewControllerDelegate {
         delegate.foursquareAuthClientDidSucceed(accessToken: accessToken)
     }
 
-    func foursquareAuthViewControllerDidFail(error: NSError) {
+    func foursquareAuthViewControllerDidFail(error: Error) {
         delegate.foursquareAuthClientDidFail?(error: error)
     }
 }

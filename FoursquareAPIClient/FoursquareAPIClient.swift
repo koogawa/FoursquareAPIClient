@@ -37,7 +37,7 @@ public class FoursquareAPIClient {
         self.version = version
     }
 
-    public init(clientId: String, clientSecret: String, version: String = "20160813") {
+    public init(clientId: String, clientSecret: String, version: String = "20171010") {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = [
             "Accept" : "application/json",
@@ -54,7 +54,7 @@ public class FoursquareAPIClient {
     public func request(path: String,
                         method: HTTPMethod = .get,
                         parameter: [String: String],
-                        completion: ((Data?,  NSError?) -> ())?) {
+                        completion: ((Data?, Error?) -> ())?) {
         // Add necessary parameters
         var parameter = parameter
         if let accessToken = self.accessToken {

@@ -11,7 +11,7 @@ import WebKit
 
 @objc protocol FoursquareAuthViewControllerDelegate {
     func foursquareAuthViewControllerDidSucceed(accessToken: String)
-    @objc optional func foursquareAuthViewControllerDidFail(error: NSError)
+    @objc optional func foursquareAuthViewControllerDidFail(error: Error)
 }
 
 class FoursquareAuthViewController: UIViewController {
@@ -48,7 +48,7 @@ class FoursquareAuthViewController: UIViewController {
         self.view.addSubview(self.webview!)
 
         // Encode URL
-        let authURLString = NSString(format: kFoursquareAuthUrlFormat, self.clientId, self.callback)
+        let authURLString = String(format: kFoursquareAuthUrlFormat, self.clientId, self.callback)
         guard let encodedURLString = authURLString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
             print("Invalid URL: ", authURLString)
             return
