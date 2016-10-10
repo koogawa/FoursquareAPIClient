@@ -38,13 +38,13 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
 
     // MARK: - Private methods
 
-    func fetchVenues(coordinate: CLLocationCoordinate2D) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func fetchVenues(_ coordinate: CLLocationCoordinate2D) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
         FoursquareManager.sharedManager().searchVenuesWithCoordinate(coordinate, completion: {
             [weak self] (error) in
 
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
             self?.tableView.reloadData()
         })
@@ -53,19 +53,19 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
 
     // MARK: - CLLocationManager delegate
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.NotDetermined {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
     }
 
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        // Guard
-        if !CLLocationCoordinate2DIsValid(newLocation.coordinate) {
-            return
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let newLocation = locations.last,
+            CLLocationCoordinate2DIsValid(newLocation.coordinate) else {
+                return
         }
 
-        userLocation = newLocation
+        self.userLocation = newLocation
 
         if isLocationInitialized == false {
             fetchVenues(newLocation.coordinate)
@@ -76,48 +76,48 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return FoursquareManager.sharedManager().venues.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("venueCell", forIndexPath: indexPath) as UITableViewCell
-        let venue = FoursquareManager.sharedManager().venues[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "venueCell", for: indexPath) as UITableViewCell
+        let venue = FoursquareManager.sharedManager().venues[(indexPath as NSIndexPath).row]
 
         // Configure the cell...
         cell.textLabel?.text = venue.name
         cell.detailTextLabel?.text = venue.address
         cell.imageView?.sd_cancelCurrentAnimationImagesLoad()
-        cell.imageView?.sd_setImageWithURL(venue.categoryIconURL,
+        cell.imageView?.sd_setImage(with: venue.categoryIconURL,
             placeholderImage: UIImage(named: "none"))
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
         if let currentLocation = userLocation {
-            let venue = FoursquareManager.sharedManager().venues[indexPath.row]
+            let venue = FoursquareManager.sharedManager().venues[(indexPath as NSIndexPath).row]
 
             // checkin
             FoursquareManager.sharedManager().checkinWithVenueId(venue.venueId!, location: currentLocation, completion:
                 { [weak self] json, error in
 
-                    let alert = UIAlertController(title: "Checkin success",
+                    let alertController = UIAlertController(title: "Checkin success",
                         message: json["meta"].description,
-                        preferredStyle: UIAlertControllerStyle.Alert)
+                        preferredStyle: UIAlertControllerStyle.alert)
                     let cancelAction: UIAlertAction = UIAlertAction(title: "Close",
-                        style: UIAlertActionStyle.Cancel,
+                        style: UIAlertActionStyle.cancel,
                         handler: nil)
-                    alert.addAction(cancelAction)
-                    self?.presentViewController(alert, animated: true, completion: nil)
+                    alertController.addAction(cancelAction)
+                    self?.present(alertController, animated: true, completion: nil)
                 }
             )
         }

@@ -72,7 +72,7 @@ let parameter: [String: String] = [
     "limit": "10",
 ];
 
-client.requestWithPath("venues/search", parameter: parameter) {
+client.request(path: "venues/search", parameter: parameter) {
     (data, error) in
 
     // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
@@ -91,7 +91,7 @@ let parameter: [String: String] = [
     "alt": "10”,
 ];
 
-client.requestWithPath("checkins/add", method: .POST, parameter: parameter) {
+client.request(path: "checkins/add", method: .post, parameter: parameter) {
     [weak self] (data, error) in
 
     // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
@@ -126,7 +126,7 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 2.2 / iOS 8.0+
+Swift 3.0 / iOS 8.0+
 
 ## Creator
 

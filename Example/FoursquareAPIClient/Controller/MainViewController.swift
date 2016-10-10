@@ -29,7 +29,7 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     // MARK: - Private methods
 
-    @IBAction func didTapLoginButton(sender: AnyObject) {
+    @IBAction func didTapLoginButton(_ sender: AnyObject) {
         // Open auth view
         let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
         client.authorizeWithRootViewController(self)
@@ -40,18 +40,18 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     func foursquareAuthClientDidSucceed(accessToken: String) {
         tokenTextView.text = accessToken
-        searchButton.enabled = true
+        searchButton.isEnabled = true
     }
 
-    func foursquareAuthClientDidFail(error: NSError) {
-        tokenTextView.text = error.description
-        searchButton.enabled = false
+    func foursquareAuthClientDidFail(error: Error) {
+        tokenTextView.text = error.localizedDescription
+        searchButton.isEnabled = false
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         if segue.identifier == "ShowVenueList" {
@@ -59,7 +59,7 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
         }
     }
 
-    @IBAction func didReturnToMainViewController(segue: UIStoryboardSegue) {
+    @IBAction func didReturnToMainViewController(_ segue: UIStoryboardSegue) {
 
     }
 }

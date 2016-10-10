@@ -11,17 +11,16 @@ import WebKit
 
 @objc protocol FoursquareAuthViewControllerDelegate {
     func foursquareAuthViewControllerDidSucceed(accessToken: String)
-    optional func foursquareAuthViewControllerDidFail(error: NSError)
+    @objc optional func foursquareAuthViewControllerDidFail(error: Error)
 }
 
 class FoursquareAuthViewController: UIViewController {
-
     private let kFoursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
 
     var webview: WKWebView!
     var clientId: String
     var callback: String
-    var delegate: FoursquareAuthViewControllerDelegate! = nil
+    var delegate: FoursquareAuthViewControllerDelegate? = nil
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -37,77 +36,75 @@ class FoursquareAuthViewController: UIViewController {
         super.viewDidLoad()
 
         // Cancel button
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel,
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel,
             target: self,
             action: #selector(FoursquareAuthViewController.cancelButtonDidTap(_:)))
         navigationItem.leftBarButtonItem = cancelButton
 
         // WKWebView
-        let rect : CGRect = UIScreen.mainScreen().bounds
-        self.webview = WKWebView(frame: CGRectMake(0, 64, rect.size.width, rect.size.height - 64))
+        let rect : CGRect = UIScreen.main.bounds
+        self.webview = WKWebView(frame: CGRect(x: 0, y: 64, width: rect.size.width, height: rect.size.height - 64))
         self.webview.navigationDelegate = self
         self.view.addSubview(self.webview!)
 
         // Encode URL
-        let authURLString = NSString(format: kFoursquareAuthUrlFormat, self.clientId, self.callback)
-        guard let encodedURLString = authURLString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) else {
+        let authURLString = String(format: kFoursquareAuthUrlFormat, self.clientId, self.callback)
+        guard let encodedURLString = authURLString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
             print("Invalid URL: ", authURLString)
             return
         }
 
         // Load auth url
-        guard let authURL = NSURL(string: encodedURLString) else {
+        guard let authURL = URL(string: encodedURLString) else {
             print("Invalid URL: ", authURLString)
             return
         }
-        self.webview?.loadRequest(NSURLRequest(URL: authURL))
+        _ = self.webview?.load(URLRequest(url: authURL))
     }
 
-    override func viewDidDisappear(animated: Bool) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    override func viewDidDisappear(_ animated: Bool) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
     // MARK: - Private methods
 
-    func cancelButtonDidTap(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func cancelButtonDidTap(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: - WKWebView delegate
 
 extension FoursquareAuthViewController: WKNavigationDelegate {
-
-    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
 
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-
-        if let urlString = navigationAction.request.URL?.absoluteString
-            where urlString.rangeOfString("access_token=") != nil {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let urlString = navigationAction.request.url?.absoluteString,
+            urlString.range(of: "access_token=") != nil {
 
             // Auth Success
-            if let accessToken = urlString.componentsSeparatedByString("=").last {
+            if let accessToken = urlString.components(separatedBy: "=").last {
 
-                delegate?.foursquareAuthViewControllerDidSucceed(accessToken)
+                delegate?.foursquareAuthViewControllerDidSucceed(accessToken: accessToken)
 
-                dismissViewControllerAnimated(true, completion: nil)
+                dismiss(animated: true, completion: nil)
 
-                decisionHandler(WKNavigationActionPolicy.Cancel)
+                decisionHandler(WKNavigationActionPolicy.cancel)
             }
         }
 
-        decisionHandler(WKNavigationActionPolicy.Allow)
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
 
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // Auth failed
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        delegate?.foursquareAuthViewControllerDidFail?(error)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        delegate?.foursquareAuthViewControllerDidFail?(error: error)
     }
 }
