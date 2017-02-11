@@ -109,15 +109,29 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
             // checkin
             FoursquareManager.sharedManager().checkinWithVenueId(venue.venueId!, location: currentLocation, completion:
                 { [weak self] json, error in
-
-                    let alertController = UIAlertController(title: "Checkin success",
-                        message: json["meta"].description,
-                        preferredStyle: UIAlertControllerStyle.alert)
-                    let cancelAction: UIAlertAction = UIAlertAction(title: "Close",
-                        style: UIAlertActionStyle.cancel,
-                        handler: nil)
-                    alertController.addAction(cancelAction)
-                    self?.present(alertController, animated: true, completion: nil)
+                    if let error = error {
+                        let alertController =
+                            UIAlertController(title: "Checkin failed",
+                                              message: error.localizedDescription,
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                        let cancelAction: UIAlertAction =
+                            UIAlertAction(title: "Close",
+                                          style: UIAlertActionStyle.cancel,
+                                          handler: nil)
+                        alertController.addAction(cancelAction)
+                        self?.present(alertController, animated: true, completion: nil)
+                    } else {
+                        let alertController =
+                            UIAlertController(title: "Checkin success",
+                                              message: json["meta"].description,
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                        let cancelAction: UIAlertAction =
+                            UIAlertAction(title: "Close",
+                                          style: UIAlertActionStyle.cancel,
+                                          handler: nil)
+                        alertController.addAction(cancelAction)
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
                 }
             )
         }
