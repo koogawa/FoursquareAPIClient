@@ -64,7 +64,7 @@ let client = FoursquareAPIClient(clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR
                                   version: "20140723”)
 ```
 
-## Search Venues
+### Search Venues
 
 ```swift
 let parameter: [String: String] = [
@@ -73,12 +73,24 @@ let parameter: [String: String] = [
 ];
 
 client.request(path: "venues/search", parameter: parameter) {
-    (data, error) in
+    [weak self] result in
 
-    // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
+    switch result {
+        
+    case let .success(data):
+        // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
+        let json = JSON(data: data) // e.g. {"meta":{"code":200},"notifications":[{"...
 
-    // result: {"meta":{"code":200},"notifications":[{"...
-    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+    case let .failure(error):
+        // Error handling
+        switch error {
+        case let .connectionError(connectionError):
+            print(connectionError)
+        case let .apiError(apiError):
+            print(apiError.errorType)   // e.g. endpoint_error
+            print(apiError.errorDetail) // e.g. The requested path does not exist.
+        }
+    }
 }
 ```
 
@@ -92,12 +104,24 @@ let parameter: [String: String] = [
 ];
 
 client.request(path: "checkins/add", method: .post, parameter: parameter) {
-    [weak self] (data, error) in
+    result in
 
-    // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
+    switch result {
 
-    // {"meta":{"code":200},"notifications":[{"type":"notificationTray"…
-    var response = NSString(data: data!, encoding: NSUTF8StringEncoding)
+    case let .success(data):
+        // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
+        let json = JSON(data: data) // e.g. {"meta":{"code":200},"notifications":[{"...
+
+    case let .failure(error):
+        // Error handling
+        switch error {
+        case let .connectionError(connectionError):
+            print(connectionError)
+        case let .apiError(apiError):
+            print(apiError.errorType)   // e.g. endpoint_error
+            print(apiError.errorDetail) // e.g. The requested path does not exist.
+        }
+    }
 }
 ```
 
