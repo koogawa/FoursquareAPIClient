@@ -32,13 +32,16 @@ class FoursquareAPIClientTests: XCTestCase {
 
         let expectation = self.expectation(description: "venues/search")
 
-        client.request(path: "venues/search", method: .get, parameter: parameter) {
-            (data, error) in
-
-            XCTAssertNotNil(data, "data should not be nil")
-            XCTAssertNil(error, "error should be nil")
-
-            expectation.fulfill()
+        client.request(path: "venues/search", parameter: parameter) {
+            result in
+            switch result {
+            case let .success(data):
+                XCTAssertNotNil(data, "data should not be nil")
+                expectation.fulfill()
+            case let .failure(error):
+                XCTAssertNotNil(error, "error should not be nil")
+                expectation.fulfill()
+            }
         }
 
         waitForExpectations(timeout: 1.0) { error in

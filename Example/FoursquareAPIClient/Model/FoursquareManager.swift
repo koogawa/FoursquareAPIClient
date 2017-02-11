@@ -33,11 +33,15 @@ class FoursquareManager: NSObject {
         ];
 
         client.request(path: "venues/search", parameter: parameter) {
-            [weak self] (data, error) in
-
-            let json = JSON(data: data!)
-            self?.venues = (self?.parseVenues(json["response"]["venues"]))!
-            completion?(error)
+            [weak self] result in
+            switch result {
+            case let .success(data):
+                let json = JSON(data: data)
+                self?.venues = (self?.parseVenues(json["response"]["venues"]))!
+                completion?(nil)
+            case let .failure(error):
+                completion?(error)
+            }
         }
     }
 
@@ -52,10 +56,14 @@ class FoursquareManager: NSObject {
         ];
 
         client.request(path: "checkins/add", method: .post, parameter: parameter) {
-            (data, error) in
-
-            let json = JSON(data: data!)
-            completion?(json, error)
+            result in
+            switch result {
+            case let .success(data):
+                let json = JSON(data: data)
+                completion?(json, nil)
+            case let .failure(error):
+                completion?(nil, error)
+            }
         }
     }
 
