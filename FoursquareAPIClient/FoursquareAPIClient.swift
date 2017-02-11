@@ -13,6 +13,50 @@ public enum HTTPMethod: String {
     case post = "POST"
 }
 
+public enum Result<T, Error> {
+    case success(T)
+    case failure(Error)
+
+    init(value: T) {
+        self = .success(value)
+    }
+
+    init(error: Error) {
+        self = .failure(error)
+    }
+}
+
+public enum FoursquareClientError: Error {
+    case connectionError(Error)
+    case apiError(FoursquareAPIError)
+}
+
+public struct FoursquareAPIError: Error {
+    let errorType: String
+    let errorDetail: String
+
+    init(json: Any) {
+        guard let dictionary = json as? [String : Any] else {
+            fatalError("Invalid json: \(json).")
+        }
+
+        guard let meta = dictionary["meta"] as? [String : Any] else {
+            fatalError("meta section not found: \(json).")
+        }
+
+        guard let errorType = meta["errorType"] as? String else {
+            fatalError("errorType not found: \(json).")
+        }
+
+        guard let errorDetail = meta["errorDetail"] as? String else {
+            fatalError("errorDetail not found: \(json).")
+        }
+
+        self.errorType = errorType
+        self.errorDetail = errorDetail
+    }
+}
+
 public class FoursquareAPIClient {
 
     private let kAPIBaseURLString = "https://api.foursquare.com/v2/"
@@ -54,7 +98,7 @@ public class FoursquareAPIClient {
     public func request(path: String,
                         method: HTTPMethod = .get,
                         parameter: [String: String],
-                        completion: ((Data?, Error?) -> ())?) {
+                        completion: @escaping (Result<Data, FoursquareClientError>) -> Void) {
         // Add necessary parameters
         var parameter = parameter
         if let accessToken = self.accessToken {
@@ -87,14 +131,20 @@ public class FoursquareAPIClient {
         }
 
         let task = self.session.dataTask(with: request as URLRequest, completionHandler: {
-            data, _, error in
-
-            if let error = error {
-                completion?(nil, error)
-                return
+            data, response, error in
+            switch (data, response, error) {
+            case (_, _, let error?):
+                completion(Result(error: .connectionError(error)))
+            case (let data?, let response?, _):
+                if case (200..<300)? = (response as? HTTPURLResponse)?.statusCode {
+                    completion(Result(value: data))
+                } else {
+                    let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                    completion(Result(error: .apiError(FoursquareAPIError(json: json))))
+                }
+            default:
+                fatalError("invalid response combination \(data), \(response), \(error).")
             }
-
-            completion?(data, error)
         })
         
         task.resume()
