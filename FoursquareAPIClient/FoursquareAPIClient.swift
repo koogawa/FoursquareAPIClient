@@ -32,8 +32,8 @@ public enum FoursquareClientError: Error {
 }
 
 public struct FoursquareAPIError: Error {
-    let errorType: String
-    let errorDetail: String
+    public let errorType: String
+    public let errorDetail: String
 
     init(json: Any) {
         guard let dictionary = json as? [String : Any] else {
