@@ -150,6 +150,63 @@ public class FoursquareAPIClient {
         task.resume()
     }
 
+    public func upload(path: String,
+                       parameter: [String: String],
+                       imageData: Data,
+                       completion: @escaping (Result<Data, FoursquareClientError>) -> Void) {
+        // Add necessary parameters
+        var parameter = parameter
+        if let accessToken = self.accessToken {
+            parameter["oauth_token"] = accessToken
+        } else if let clientId = self.clientId, let clientSecret = self.clientSecret {
+            parameter["client_id"] = clientId
+            parameter["client_secret"] = clientSecret
+        }
+        parameter["v"] = self.version
+
+        let urlString = kAPIBaseURLString + path
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL: ", urlString)
+            return
+        }
+        let request = NSMutableURLRequest(url: url)
+
+        let boundary = UUID().uuidString
+        let contentType = "multipart/form-data; boundary=" + boundary
+        request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+        var body = Data()
+        let appendStringBlock = { (string: String) in
+            body.append(string.data(using: String.Encoding.utf8, allowLossyConversion: true)!)
+            print("body: ", NSString(data:body as Data, encoding:String.Encoding.utf8.rawValue))
+        }
+
+        appendStringBlock("\r\n--\(boundary)\r\n")
+        appendStringBlock("Content-Disposition: form-data; name=\"photo\"; filename=\"photo.jpg\"\r\n")
+        appendStringBlock("Content-Type: image/jpg\r\n\r\n")
+        body.append(imageData)
+        appendStringBlock("\r\n--\(boundary)--\r\n")
+
+        print("body: ", NSString(data:body as Data, encoding:String.Encoding.utf8.rawValue))
+        let task = self.session.uploadTask(with: request as URLRequest, from: body as Data,completionHandler: {
+            data, response, error in
+            switch (data, response, error) {
+            case (_, _, let error?):
+                completion(Result(error: .connectionError(error)))
+            case (let data?, let response?, _):
+                if case (200..<300)? = (response as? HTTPURLResponse)?.statusCode {
+                    completion(Result(value: data))
+                } else {
+                    let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                    completion(Result(error: .apiError(FoursquareAPIError(json: json))))
+                }
+            default:
+                fatalError("invalid response combination \(data), \(response), \(error).")
+            }
+        })
+
+        task.resume()
+    }
+
     private func buildQueryString(fromDictionary parameters: [String: String]) -> String {
         var urlVars = [String]()
         for (key, val) in parameters {
