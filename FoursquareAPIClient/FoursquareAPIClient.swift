@@ -154,7 +154,23 @@ public class FoursquareAPIClient {
                        parameter: [String: String],
                        imageData: Data,
                        completion: @escaping (Result<Data, FoursquareClientError>) -> Void) {
-        // Add necessary parameters
+        let urlString = kAPIBaseURLString + path
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL: ", urlString)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+
+        let boundary = UUID().uuidString
+        let contentType = "multipart/form-data; boundary=" + boundary
+        request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+        var body = Data()
+        let appendStringBlock = { (string: String) in
+            body.append(string.data(using: String.Encoding.utf8, allowLossyConversion: true)!)
+        }
+
+        // Make necessary parameters
         var parameter = parameter
         if let accessToken = self.accessToken {
             parameter["oauth_token"] = accessToken
@@ -164,20 +180,10 @@ public class FoursquareAPIClient {
         }
         parameter["v"] = self.version
 
-        let urlString = kAPIBaseURLString + path
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL: ", urlString)
-            return
-        }
-        let request = NSMutableURLRequest(url: url)
-
-        let boundary = UUID().uuidString
-        let contentType = "multipart/form-data; boundary=" + boundary
-        request.addValue(contentType, forHTTPHeaderField: "Content-Type")
-        var body = Data()
-        let appendStringBlock = { (string: String) in
-            body.append(string.data(using: String.Encoding.utf8, allowLossyConversion: true)!)
-            print("body: ", NSString(data:body as Data, encoding:String.Encoding.utf8.rawValue))
+        for (key, value) in parameter {
+            appendStringBlock("--\(boundary)\r\n")
+            appendStringBlock("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            appendStringBlock("\(value)\r\n")
         }
 
         appendStringBlock("\r\n--\(boundary)\r\n")
@@ -186,8 +192,7 @@ public class FoursquareAPIClient {
         body.append(imageData)
         appendStringBlock("\r\n--\(boundary)--\r\n")
 
-        print("body: ", NSString(data:body as Data, encoding:String.Encoding.utf8.rawValue))
-        let task = self.session.uploadTask(with: request as URLRequest, from: body as Data,completionHandler: {
+        let task = self.session.uploadTask(with: request as URLRequest, from: body, completionHandler: {
             data, response, error in
             switch (data, response, error) {
             case (_, _, let error?):
