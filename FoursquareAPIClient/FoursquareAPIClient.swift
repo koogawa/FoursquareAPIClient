@@ -95,6 +95,11 @@ public class FoursquareAPIClient {
         self.version = version
     }
 
+    /// Request API
+    /// - parameter path: API path e.g. photos/add
+    /// - parameter method: .get (default) or .post
+    /// - parameter parameter: Parameters as a dictinary
+    /// - parameter completion: Completion handler
     public func request(path: String,
                         method: HTTPMethod = .get,
                         parameter: [String: String],
@@ -150,6 +155,11 @@ public class FoursquareAPIClient {
         task.resume()
     }
 
+    /// Upload jpeg image
+    /// - parameter path: API path e.g. photos/add
+    /// - parameter parameter: Parameters as a dictinary
+    /// - parameter imageData: Should be "image/jpeg". Max 5MB
+    /// - parameter completion: Completion handler
     public func upload(path: String,
                        parameter: [String: String],
                        imageData: Data,
