@@ -125,6 +125,29 @@ client.request(path: "checkins/add", method: .post, parameter: parameter) {
 }
 ```
 
+### Add a Photo
+
+```
+let parameter: [String: String] = [
+    "checkinId": "IHR8THISVNU",
+    "broadcast": "twitter,facebook",
+    "postText": "Awesome!",
+];
+
+let yourImage = UIImage(named: "photo")
+let imageData = UIImageJPEGRepresentation(yourImage!, 1)
+
+client.upload(path: "photos/add", parameter: parameter, imageData: imageData!) {
+    result in
+    switch result {
+    case let .success(data):
+        // Upload success
+    case let .failure(error):
+        // Upload error
+    }
+}
+```
+
 ## Authorization
 
 ### Setup
