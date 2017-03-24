@@ -35,6 +35,20 @@ class FoursquareAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                print("cookie:: \(cookie)")
+            }
+        } else {
+            print("No cookie")
+        }
+
+
+        let yourWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: 320, height: 500))
+        yourWebView.loadRequest(URLRequest(url: URL(string: "https://foursquare.com/")!))
+        self.view.addSubview(yourWebView)
+
+        return
         // Cancel button
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel,
             target: self,
@@ -60,6 +74,16 @@ class FoursquareAuthViewController: UIViewController {
             return
         }
         _ = self.webview?.load(URLRequest(url: authURL))
+
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            print("cookie:: \(cookies)")
+            for cookie in cookies {
+                print("cookie:: \(cookie)")
+            }
+        } else {
+            print("No cookie")
+        }
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
