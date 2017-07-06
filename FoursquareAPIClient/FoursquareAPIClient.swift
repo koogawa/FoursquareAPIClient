@@ -148,7 +148,7 @@ public class FoursquareAPIClient {
                     completion(Result(error: .apiError(FoursquareAPIError(json: json))))
                 }
             default:
-                fatalError("invalid response combination \(data), \(response), \(error).")
+                fatalError("invalid response combination \(data.debugDescription), \(response.debugDescription), \(error.debugDescription).")
             }
         })
         
@@ -215,7 +215,7 @@ public class FoursquareAPIClient {
                     completion(Result(error: .apiError(FoursquareAPIError(json: json))))
                 }
             default:
-                fatalError("invalid response combination \(data), \(response), \(error).")
+                fatalError("invalid response combination \(data.debugDescription), \(response.debugDescription), \(error.debugDescription).")
             }
         })
 
