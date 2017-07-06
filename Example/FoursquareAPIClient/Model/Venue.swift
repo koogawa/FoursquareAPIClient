@@ -21,11 +21,11 @@ struct Venue: CustomStringConvertible {
     var categoryIconURL: URL?
 
     var description: String {
-        return "<venueId=\(venueId)"
-            + ", name=\(name)"
-            + ", address=\(address)"
-            + ", latitude=\(latitude), longitude=\(longitude)"
-            + ", categoryIconURL=\(categoryIconURL)>"
+        return "<venueId=\(venueId.debugDescription)"
+            + ", name=\(name.debugDescription)"
+            + ", address=\(address.debugDescription)"
+            + ", latitude=\(latitude.debugDescription), longitude=\(longitude.debugDescription)"
+            + ", categoryIconURL=\(categoryIconURL.debugDescription)>"
     }
 
     init(json: JSON) {
