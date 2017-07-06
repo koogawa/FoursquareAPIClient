@@ -68,7 +68,7 @@ class FoursquareAuthViewController: UIViewController {
 
     // MARK: - Private methods
 
-    func cancelButtonDidTap(_ sender: AnyObject) {
+    @objc func cancelButtonDidTap(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
 }
