@@ -90,12 +90,10 @@ extension FoursquareAuthViewController: WKNavigationDelegate {
 
             // Auth Success
             if let accessToken = urlString.components(separatedBy: "=").last {
-
                 delegate?.foursquareAuthViewControllerDidSucceed(accessToken: accessToken)
-
                 dismiss(animated: true, completion: nil)
-
                 decisionHandler(WKNavigationActionPolicy.cancel)
+                return
             }
         }
 
