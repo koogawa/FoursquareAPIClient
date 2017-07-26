@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-import SwiftyJSON
+import SwiftyJSON_3_1_1
 
 class FoursquareManager: NSObject {
 

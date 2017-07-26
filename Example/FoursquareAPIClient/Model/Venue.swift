@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftyJSON
+import SwiftyJSON_3_1_1
 
 let kCategoryIconSize = 88  // pixel
 
