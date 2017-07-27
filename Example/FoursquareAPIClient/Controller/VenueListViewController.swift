@@ -92,10 +92,16 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
 
         // Configure the cell...
         cell.textLabel?.text = venue.name
-        cell.detailTextLabel?.text = venue.address
+        cell.detailTextLabel?.text = venue.location.address
         cell.imageView?.sd_cancelCurrentAnimationImagesLoad()
-        cell.imageView?.sd_setImage(with: venue.categoryIconURL,
-            placeholderImage: UIImage(named: "none"))
+
+        var categoryIconURL: URL? = nil
+        if let categories = venue.categories {
+            if !categories.isEmpty {
+                categoryIconURL = URL(string: categories[0].icon.categoryIconUrl)
+            }
+        }
+        cell.imageView?.sd_setImage(with: categoryIconURL, placeholderImage: UIImage(named: "none"))
 
         return cell
     }
@@ -107,8 +113,8 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
             let venue = FoursquareManager.sharedManager().venues[(indexPath as NSIndexPath).row]
 
             // checkin
-            FoursquareManager.sharedManager().checkinWithVenueId(venue.venueId!, location: currentLocation, completion:
-                { [weak self] json, error in
+            FoursquareManager.sharedManager().checkinWithVenueId(venue.venueId, location: currentLocation, completion:
+                { [weak self] checkin, error in
                     if let error = error {
                         let alertController =
                             UIAlertController(title: "Checkin failed",
@@ -123,7 +129,7 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
                     } else {
                         let alertController =
                             UIAlertController(title: "Checkin success",
-                                              message: json["meta"].description,
+                                              message: checkin?.venue.name,
                                               preferredStyle: UIAlertControllerStyle.alert)
                         let cancelAction: UIAlertAction =
                             UIAlertAction(title: "Close",

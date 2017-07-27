@@ -9,12 +9,10 @@
 import UIKit
 import MapKit
 
-import SwiftyJSON_3_1_1
-
 class FoursquareManager: NSObject {
 
     var accessToken: String!
-    var venues = [Venue]()
+    var venues: [Venue] = []
 
     class func sharedManager() -> FoursquareManager {
 
@@ -36,16 +34,21 @@ class FoursquareManager: NSObject {
             [weak self] result in
             switch result {
             case let .success(data):
-                let json = JSON(data: data)
-                self?.venues = (self?.parseVenues(json["response"]["venues"]))!
-                completion?(nil)
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let response = try Response<SearchResponse>(json: json)
+                    self?.venues = response.response.venues
+                    completion?(nil)
+                } catch {
+                    completion?(error)
+                }
             case let .failure(error):
                 completion?(error)
             }
         }
     }
 
-    func checkinWithVenueId(_ venueId: String, location: CLLocation, completion: ((JSON, Error?) -> ())?) {
+    func checkinWithVenueId(_ venueId: String, location: CLLocation, completion: ((Checkin?, Error?) -> ())?) {
 
         let client = FoursquareAPIClient(accessToken: accessToken)
 
@@ -59,22 +62,16 @@ class FoursquareManager: NSObject {
             result in
             switch result {
             case let .success(data):
-                let json = JSON(data: data)
-                completion?(json, nil)
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let response = try Response<CheckinResponse>(json: json)
+                    completion?(response.response.checkin, nil)
+                } catch {
+                    completion?(nil, error)
+                }
             case let .failure(error):
                 completion?(nil, error)
             }
         }
-    }
-
-    func parseVenues(_ venuesJSON: JSON) -> [Venue] {
-
-        var venues = [Venue]()
-
-        for (key: _, venueJSON: JSON) in venuesJSON {
-            venues.append(Venue(json: JSON))
-        }
-
-        return venues
     }
 }
