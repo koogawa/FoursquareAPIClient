@@ -4,5 +4,4 @@ use_frameworks!
 
 target 'FoursquareAPIClient' do
     pod 'SDWebImage'
-    pod 'SwiftyJSON'
 end

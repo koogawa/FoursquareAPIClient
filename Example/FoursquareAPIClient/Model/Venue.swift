@@ -7,44 +7,42 @@
 //
 
 import UIKit
-import SwiftyJSON
 
-let kCategoryIconSize = 88  // pixel
+struct Venue: JSONDecodable {
 
-struct Venue: CustomStringConvertible {
+    let venueId: String
+    let name: String
+    let location: Location
+    let categories: [VenueCategory]?
 
-    let venueId: String?
-    let name: String?
-    let address: String?
-    let latitude: Double?
-    let longitude: Double?
-    var categoryIconURL: URL?
-
-    var description: String {
-        return "<venueId=\(venueId.debugDescription)"
-            + ", name=\(name.debugDescription)"
-            + ", address=\(address.debugDescription)"
-            + ", latitude=\(latitude.debugDescription), longitude=\(longitude.debugDescription)"
-            + ", categoryIconURL=\(categoryIconURL.debugDescription)>"
-    }
-
-    init(json: JSON) {
-
-        self.venueId = json["id"].string
-        self.name = json["name"].string
-        self.address = json["location"]["address"].string
-        self.latitude = json["location"]["lat"].double
-        self.longitude = json["location"]["lng"].double
-        self.categoryIconURL = nil
-
-        // Primary Category
-        if let categories = json["categories"].array {
-            if !categories.isEmpty {
-                let prefix = json["categories"][0]["icon"]["prefix"].string
-                let suffix = json["categories"][0]["icon"]["suffix"].string
-                let iconUrlString = String(format: "%@%d%@", prefix!, kCategoryIconSize, suffix!)
-                self.categoryIconURL = URL(string: iconUrlString as String)
-            }
+    init(json: Any) throws {
+        guard let dictionary = json as? [String : Any] else {
+            throw JSONDecodeError.invalidFormat(json: json)
         }
+
+        guard let venueId = dictionary["id"] as? String else {
+            throw JSONDecodeError.missingValue(key: "id", actualValue: dictionary["id"])
+        }
+
+        guard let name = dictionary["name"] as? String else {
+            throw JSONDecodeError.missingValue(key: "name", actualValue: dictionary["name"])
+        }
+
+        guard let location = dictionary["location"] else {
+            throw JSONDecodeError.missingValue(key: "location", actualValue: dictionary["location"])
+        }
+
+        guard let categoryObjects = dictionary["categories"] as? [Any] else {
+            throw JSONDecodeError.missingValue(key: "categories", actualValue: dictionary["categories"])
+        }
+
+        let categories = try categoryObjects.map {
+            return try VenueCategory(json: $0)
+        }
+
+        self.venueId = venueId
+        self.name = name
+        self.location = try Location(json: location)
+        self.categories = categories
     }
 }

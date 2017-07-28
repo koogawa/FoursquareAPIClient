@@ -20,6 +20,15 @@
 		21D02B281B60B4B00030F2D7 /* FoursquareAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */; };
 		21D02B2C1B60B4D80030F2D7 /* FoursquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */; };
 		21D02B2D1B60B4D80030F2D7 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B2B1B60B4D80030F2D7 /* Venue.swift */; };
+		4AECEA511F2962CF00C26283 /* JSONDecodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA501F2962CF00C26283 /* JSONDecodeError.swift */; };
+		4AECEA531F29687B00C26283 /* VenueCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA521F29687B00C26283 /* VenueCategory.swift */; };
+		4AECEA551F29694800C26283 /* VenueCategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA541F29694800C26283 /* VenueCategoryIcon.swift */; };
+		4AECEA571F296FF000C26283 /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA561F296FF000C26283 /* JSONDecodable.swift */; };
+		4AECEA591F2973A800C26283 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA581F2973A800C26283 /* SearchResponse.swift */; };
+		4AECEA5B1F297BFE00C26283 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA5A1F297BFE00C26283 /* Response.swift */; };
+		4AECEA5D1F29892100C26283 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA5C1F29892100C26283 /* Location.swift */; };
+		4AECEA5F1F298C0600C26283 /* CheckinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA5E1F298C0600C26283 /* CheckinResponse.swift */; };
+		4AECEA621F29A5F200C26283 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AECEA611F29A5F200C26283 /* Checkin.swift */; };
 		F6C5D1D53A77FA077D958A77 /* Pods_FoursquareAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175DA5687E718AA4F98184AB /* Pods_FoursquareAPIClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +62,15 @@
 		21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareManager.swift; sourceTree = "<group>"; };
 		21D02B2B1B60B4D80030F2D7 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		21D02B2E1B60C76C0030F2D7 /* FoursquareAPIClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoursquareAPIClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		4AECEA501F2962CF00C26283 /* JSONDecodeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodeError.swift; sourceTree = "<group>"; };
+		4AECEA521F29687B00C26283 /* VenueCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueCategory.swift; sourceTree = "<group>"; };
+		4AECEA541F29694800C26283 /* VenueCategoryIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueCategoryIcon.swift; sourceTree = "<group>"; };
+		4AECEA561F296FF000C26283 /* JSONDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
+		4AECEA581F2973A800C26283 /* SearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		4AECEA5A1F297BFE00C26283 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		4AECEA5C1F29892100C26283 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		4AECEA5E1F298C0600C26283 /* CheckinResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinResponse.swift; sourceTree = "<group>"; };
+		4AECEA611F29A5F200C26283 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
 		B1F3AA7CB3AF3BF90372EE38 /* Pods-FoursquareAPIClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareAPIClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,10 +185,27 @@
 		21D02B291B60B4D80030F2D7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4AECEA601F298C2300C26283 /* Response */,
+				4AECEA611F29A5F200C26283 /* Checkin.swift */,
 				21D02B2A1B60B4D80030F2D7 /* FoursquareManager.swift */,
+				4AECEA561F296FF000C26283 /* JSONDecodable.swift */,
+				4AECEA501F2962CF00C26283 /* JSONDecodeError.swift */,
+				4AECEA5C1F29892100C26283 /* Location.swift */,
 				21D02B2B1B60B4D80030F2D7 /* Venue.swift */,
+				4AECEA521F29687B00C26283 /* VenueCategory.swift */,
+				4AECEA541F29694800C26283 /* VenueCategoryIcon.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4AECEA601F298C2300C26283 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4AECEA5E1F298C0600C26283 /* CheckinResponse.swift */,
+				4AECEA5A1F297BFE00C26283 /* Response.swift */,
+				4AECEA581F2973A800C26283 /* SearchResponse.swift */,
+			);
+			name = Response;
 			sourceTree = "<group>";
 		};
 		BA3F03553E9A249357D6DDA1 /* Frameworks */ = {
@@ -327,7 +362,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -337,14 +372,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AECEA591F2973A800C26283 /* SearchResponse.swift in Sources */,
 				21AD6B4C1B63140A002F2A41 /* FoursquareAuthViewController.swift in Sources */,
 				21D02B2C1B60B4D80030F2D7 /* FoursquareManager.swift in Sources */,
 				21D02B2D1B60B4D80030F2D7 /* Venue.swift in Sources */,
+				4AECEA621F29A5F200C26283 /* Checkin.swift in Sources */,
+				4AECEA5F1F298C0600C26283 /* CheckinResponse.swift in Sources */,
+				4AECEA571F296FF000C26283 /* JSONDecodable.swift in Sources */,
+				4AECEA531F29687B00C26283 /* VenueCategory.swift in Sources */,
+				4AECEA5B1F297BFE00C26283 /* Response.swift in Sources */,
+				4AECEA5D1F29892100C26283 /* Location.swift in Sources */,
 				21AD6B4E1B66216F002F2A41 /* FoursquareAuthClient.swift in Sources */,
 				21AAEAAA1B607EFC0067944E /* MainViewController.swift in Sources */,
+				4AECEA551F29694800C26283 /* VenueCategoryIcon.swift in Sources */,
 				21D02B251B60B34F0030F2D7 /* VenueListViewController.swift in Sources */,
 				21D02B281B60B4B00030F2D7 /* FoursquareAPIClient.swift in Sources */,
 				21AAEAA81B607EFC0067944E /* AppDelegate.swift in Sources */,
+				4AECEA511F2962CF00C26283 /* JSONDecodeError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
