@@ -18,8 +18,8 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
     private var session: SFAuthenticationSession? = nil
 
     private let foursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
-    private let clientId = ""
-    private let callback = "fsoauthexample://authorized"
+    private let clientId = "(YOUR_CLIENT_ID)"
+    private let callback = "(YOUR_CALLBACK)"
 
     override func viewDidLoad() {
         super.viewDidLoad()
