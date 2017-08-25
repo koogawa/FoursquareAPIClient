@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import SafariServices
 
+@available(iOS 11.0, *)
 class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBOutlet weak var tokenTextView: UITextView!
     @IBOutlet weak var searchButton: UIButton!
 
-    let clientId = "(YOUR_CLIENT_ID)"
-    let callback = "(YOUR_CALLBACK_URL)"
+    private var session: SFAuthenticationSession? = nil
+
+    private let foursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
+    private let clientId = ""
+    private let callback = "fsoauthexample://authorized"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +36,43 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBAction func didTapLoginButton(_ sender: AnyObject) {
         // Open auth view
+        
+        // Encode URL
+        let authURLString = String(format: foursquareAuthUrlFormat, self.clientId, self.callback)
+        guard let encodedURLString = authURLString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+            print("Invalid URL: ", authURLString)
+            return
+        }
+
+        guard let authURL = URL(string: encodedURLString) else {
+            print("Invalid URL: ", authURLString)
+            return
+        }
+
+        guard let callbackURLScheme = URL(string: self.callback) else {
+            print("Invalid callbackURLScheme: ", self.callback)
+            return
+        }
+
+        self.session = SFAuthenticationSession(url: authURL, callbackURLScheme: callbackURLScheme.scheme) { url, error in
+            print(url, error)
+            // fsoauthexample://authorized#access_token=XXXXXXXXXXXXXX
+            if let urlString = navigationAction.request.url?.absoluteString,
+                urlString.range(of: "access_token=") != nil {
+
+                // Auth Success
+                if let accessToken = urlString.components(separatedBy: "=").last {
+                    delegate?.foursquareAuthViewControllerDidSucceed(accessToken: accessToken)
+                    dismiss(animated: true, completion: nil)
+                    decisionHandler(WKNavigationActionPolicy.cancel)
+                    return
+                }
+            }
+
+        }
+        session?.start()
+return
+
         let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
         client.authorizeWithRootViewController(self)
     }
