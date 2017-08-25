@@ -9,13 +9,12 @@
 import UIKit
 import SafariServices
 
-@available(iOS 11.0, *)
 class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBOutlet weak var tokenTextView: UITextView!
     @IBOutlet weak var searchButton: UIButton!
 
-    private var session: SFAuthenticationSession? = nil
+    private var session: NSObject?
 
     private let foursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
     private let clientId = "(YOUR_CLIENT_ID)"
@@ -36,7 +35,16 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBAction func didTapLoginButton(_ sender: AnyObject) {
         // Open auth view
-        
+        if #available(iOS 11.0, *) {
+            self.authorizeWithSFAuthenticationSession()
+        } else {
+            let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
+            client.authorizeWithRootViewController(self)
+        }
+    }
+
+    @available(iOS 11.0, *)
+    func authorizeWithSFAuthenticationSession() {
         // Encode URL
         let authURLString = String(format: foursquareAuthUrlFormat, self.clientId, self.callback)
         guard let encodedURLString = authURLString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
@@ -54,27 +62,18 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
             return
         }
 
-        self.session = SFAuthenticationSession(url: authURL, callbackURLScheme: callbackURLScheme.scheme) { url, error in
-            print(url, error)
-            // fsoauthexample://authorized#access_token=XXXXXXXXXXXXXX
-            if let urlString = navigationAction.request.url?.absoluteString,
-                urlString.range(of: "access_token=") != nil {
-
+        let session = SFAuthenticationSession(url: authURL, callbackURLScheme: callbackURLScheme.scheme) { url, error in
+            if let urlString = url?.absoluteString, urlString.range(of: "access_token=") != nil {
                 // Auth Success
                 if let accessToken = urlString.components(separatedBy: "=").last {
-                    delegate?.foursquareAuthViewControllerDidSucceed(accessToken: accessToken)
-                    dismiss(animated: true, completion: nil)
-                    decisionHandler(WKNavigationActionPolicy.cancel)
+                    self.tokenTextView.text = accessToken
+                    self.searchButton.isEnabled = true
                     return
                 }
             }
-
         }
-        session?.start()
-return
-
-        let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
-        client.authorizeWithRootViewController(self)
+        session.start()
+        self.session = session
     }
 
 
