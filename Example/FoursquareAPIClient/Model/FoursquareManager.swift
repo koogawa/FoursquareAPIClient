@@ -34,9 +34,9 @@ class FoursquareManager: NSObject {
             [weak self] result in
             switch result {
             case let .success(data):
+                let decoder: JSONDecoder = JSONDecoder()
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    let response = try Response<SearchResponse>(json: json)
+                    let response = try decoder.decode(Response<SearchResponse>.self, from: data)
                     self?.venues = response.response.venues
                     completion?(nil)
                 } catch {
@@ -62,9 +62,9 @@ class FoursquareManager: NSObject {
             result in
             switch result {
             case let .success(data):
+                let decoder: JSONDecoder = JSONDecoder()
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    let response = try Response<CheckinResponse>(json: json)
+                    let response = try decoder.decode(Response<CheckinResponse>.self, from: data)
                     completion?(response.response.checkin, nil)
                 } catch {
                     completion?(nil, error)

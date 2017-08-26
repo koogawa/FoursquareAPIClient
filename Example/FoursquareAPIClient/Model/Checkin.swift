@@ -8,25 +8,12 @@
 
 import Foundation
 
-struct Checkin: JSONDecodable {
-
+struct Checkin: Codable {
     let checkinId: String
     let venue: Venue
 
-    init(json: Any) throws {
-        guard let dictionary = json as? [String : Any] else {
-            throw JSONDecodeError.invalidFormat(json: json)
-        }
-
-        guard let checkinId = dictionary["id"] as? String else {
-            throw JSONDecodeError.missingValue(key: "id", actualValue: dictionary["id"])
-        }
-
-        guard let venueObject = dictionary["venue"] else {
-            throw JSONDecodeError.missingValue(key: "venue", actualValue: dictionary["venue"])
-        }
-
-        self.checkinId = checkinId
-        self.venue = try Venue(json: venueObject)
+    private enum CodingKeys: String, CodingKey {
+        case checkinId = "id"
+        case venue
     }
 }
