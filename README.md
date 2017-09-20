@@ -94,7 +94,7 @@ client.request(path: "venues/search", parameter: parameter) { result in
 
 ### Check in to Venue
 
-```
+```swift
 let parameter: [String: String] = [
     "venueId": "55b731a9498eecdfb"3854a9”,
     "ll": "37.33262674912818,-122.030451055438",
@@ -122,7 +122,7 @@ client.request(path: "checkins/add", method: .post, parameter: parameter) { resu
 
 ### Add a Photo
 
-```
+```swift
 let parameter: [String: String] = [
     "checkinId": "IHR8THISVNU",
     "broadcast": "twitter,facebook",
@@ -147,7 +147,7 @@ client.upload(path: "photos/add", parameter: parameter, imageData: imageData!) {
 
 ### Setup
 
-```
+```swift
 let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
                                   callback: "YOUR_CALLBACK_URL",
                                   delegate: self)
@@ -155,7 +155,7 @@ let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
 
 ### Delegate
 
-```
+```swift
 func foursquareAuthClientDidSucceed(accessToken: String) {
     print(accessToken)
 }
