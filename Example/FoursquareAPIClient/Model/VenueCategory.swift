@@ -8,31 +8,14 @@
 
 import Foundation
 
-struct VenueCategory: JSONDecodable {
-
+struct VenueCategory: Codable {
     let categoryId: String
     let name: String
     let icon: VenueCategoryIcon
 
-    init(json: Any) throws {
-        guard let dictionary = json as? [String : Any] else {
-            throw JSONDecodeError.invalidFormat(json: json)
-        }
-
-        guard let categoryId = dictionary["id"] as? String else {
-            throw JSONDecodeError.missingValue(key: "id", actualValue: dictionary["id"])
-        }
-
-        guard let name = dictionary["name"] as? String else {
-            throw JSONDecodeError.missingValue(key: "name", actualValue: dictionary["name"])
-        }
-
-        guard let iconObject = dictionary["icon"] else {
-            throw JSONDecodeError.missingValue(key: "icon", actualValue: dictionary["icon"])
-        }
-
-        self.categoryId = categoryId
-        self.name = name
-        self.icon = try VenueCategoryIcon(json: iconObject)
+    private enum CodingKeys: String, CodingKey {
+        case categoryId = "id"
+        case name
+        case icon
     }
 }

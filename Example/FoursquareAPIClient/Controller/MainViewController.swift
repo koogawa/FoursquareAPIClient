@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import SafariServices
 
 class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBOutlet weak var tokenTextView: UITextView!
     @IBOutlet weak var searchButton: UIButton!
 
-    let clientId = "(YOUR_CLIENT_ID)"
-    let callback = "(YOUR_CALLBACK_URL)"
+    private var session: NSObject?
+
+    private let foursquareAuthUrlFormat = "https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
+    private let clientId = "(YOUR_CLIENT_ID)"
+    private let callback = "(YOUR_CALLBACK)" // e.g. fsoauthexample://authorized
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +35,45 @@ class MainViewController: UIViewController, FoursquareAuthClientDelegate {
 
     @IBAction func didTapLoginButton(_ sender: AnyObject) {
         // Open auth view
-        let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
-        client.authorizeWithRootViewController(self)
+        if #available(iOS 11.0, *) {
+            self.authorizeWithSFAuthenticationSession()
+        } else {
+            let client = FoursquareAuthClient(clientId: clientId, callback: callback, delegate: self)
+            client.authorizeWithRootViewController(self)
+        }
+    }
+
+    @available(iOS 11.0, *)
+    func authorizeWithSFAuthenticationSession() {
+        // Encode URL
+        let authURLString = String(format: foursquareAuthUrlFormat, self.clientId, self.callback)
+        guard let encodedURLString = authURLString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+            print("Invalid URL: ", authURLString)
+            return
+        }
+
+        guard let authURL = URL(string: encodedURLString) else {
+            print("Invalid URL: ", authURLString)
+            return
+        }
+
+        guard let callbackURLScheme = URL(string: self.callback) else {
+            print("Invalid callbackURLScheme: ", self.callback)
+            return
+        }
+
+        let session = SFAuthenticationSession(url: authURL, callbackURLScheme: callbackURLScheme.scheme) { url, error in
+            if let urlString = url?.absoluteString, urlString.range(of: "access_token=") != nil {
+                // Auth Success
+                if let accessToken = urlString.components(separatedBy: "=").last {
+                    self.tokenTextView.text = accessToken
+                    self.searchButton.isEnabled = true
+                    return
+                }
+            }
+        }
+        session.start()
+        self.session = session
     }
 
 
