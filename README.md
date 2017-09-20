@@ -72,14 +72,12 @@ let parameter: [String: String] = [
     "limit": "10",
 ];
 
-client.request(path: "venues/search", parameter: parameter) {
-    [weak self] result in
-
+client.request(path: "venues/search", parameter: parameter) { result in
     switch result {
-        
     case let .success(data):
         // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
-        let json = JSON(data: data) // e.g. {"meta":{"code":200},"notifications":[{"...
+        // e.g. {"meta":{"code":200},"notifications":[{"...
+        let json = try! JSONSerialization.jsonObject(with: data, options: [])
 
     case let .failure(error):
         // Error handling
@@ -96,22 +94,19 @@ client.request(path: "venues/search", parameter: parameter) {
 
 ### Check in to Venue
 
-```
+```swift
 let parameter: [String: String] = [
     "venueId": "55b731a9498eecdfb"3854a9”,
     "ll": "37.33262674912818,-122.030451055438",
     "alt": "10”,
 ];
 
-client.request(path: "checkins/add", method: .post, parameter: parameter) {
-    result in
-
+client.request(path: "checkins/add", method: .post, parameter: parameter) { result in
     switch result {
-
     case let .success(data):
         // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
-        let json = JSON(data: data) // e.g. {"meta":{"code":200},"notifications":[{"...
-
+        // e.g. {"meta":{"code":200},"notifications":[{"...
+        let json = try! JSONSerialization.jsonObject(with: data, options: [])
     case let .failure(error):
         // Error handling
         switch error {
@@ -127,7 +122,7 @@ client.request(path: "checkins/add", method: .post, parameter: parameter) {
 
 ### Add a Photo
 
-```
+```swift
 let parameter: [String: String] = [
     "checkinId": "IHR8THISVNU",
     "broadcast": "twitter,facebook",
@@ -152,7 +147,7 @@ client.upload(path: "photos/add", parameter: parameter, imageData: imageData!) {
 
 ### Setup
 
-```
+```swift
 let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
                                   callback: "YOUR_CALLBACK_URL",
                                   delegate: self)
@@ -160,7 +155,7 @@ let client = FoursquareAuthClient(clientId: "YOUR_CLIENT_ID",
 
 ### Delegate
 
-```
+```swift
 func foursquareAuthClientDidSucceed(accessToken: String) {
     print(accessToken)
 }
@@ -173,7 +168,7 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 3.0 / iOS 8.0+
+Swift 4.0 / iOS 8.0+
 
 ## Creator
 
