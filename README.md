@@ -72,14 +72,12 @@ let parameter: [String: String] = [
     "limit": "10",
 ];
 
-client.request(path: "venues/search", parameter: parameter) {
-    [weak self] result in
-
+client.request(path: "venues/search", parameter: parameter) { result in
     switch result {
-        
     case let .success(data):
         // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
-        let json = JSON(data: data) // e.g. {"meta":{"code":200},"notifications":[{"...
+        // e.g. {"meta":{"code":200},"notifications":[{"...
+        let json = try! JSONSerialization.jsonObject(with: data, options: [])
 
     case let .failure(error):
         // Error handling
@@ -103,15 +101,12 @@ let parameter: [String: String] = [
     "alt": "10”,
 ];
 
-client.request(path: "checkins/add", method: .post, parameter: parameter) {
-    result in
-
+client.request(path: "checkins/add", method: .post, parameter: parameter) { result in
     switch result {
-
     case let .success(data):
         // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
-        let json = JSON(data: data) // e.g. {"meta":{"code":200},"notifications":[{"...
-
+        // e.g. {"meta":{"code":200},"notifications":[{"...
+        let json = try! JSONSerialization.jsonObject(with: data, options: [])
     case let .failure(error):
         // Error handling
         switch error {
@@ -173,7 +168,7 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 3.0 / iOS 8.0+
+Swift 4.0 / iOS 8.0+
 
 ## Creator
 
