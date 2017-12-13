@@ -84,6 +84,8 @@ client.request(path: "venues/search", parameter: parameter) { result in
         switch error {
         case let .connectionError(connectionError):
             print(connectionError)
+        case let .responseParseError(responseParseError):
+            print(responseParseError)   // e.g. JSON text did not start with array or object and option to allow fragments not set.
         case let .apiError(apiError):
             print(apiError.errorType)   // e.g. endpoint_error
             print(apiError.errorDetail) // e.g. The requested path does not exist.
@@ -112,6 +114,8 @@ client.request(path: "checkins/add", method: .post, parameter: parameter) { resu
         switch error {
         case let .connectionError(connectionError):
             print(connectionError)
+        case let .responseParseError(responseParseError):
+            print(responseParseError)   // e.g. JSON text did not start with array or object and option to allow fragments not set.
         case let .apiError(apiError):
             print(apiError.errorType)   // e.g. endpoint_error
             print(apiError.errorDetail) // e.g. The requested path does not exist.
