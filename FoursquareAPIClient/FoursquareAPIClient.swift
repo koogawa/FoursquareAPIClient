@@ -28,7 +28,6 @@ public enum Result<T, Error> {
 
 public enum FoursquareClientError: Error {
     case connectionError(Error)
-    case responseParseError(Error)
     case apiError(FoursquareAPIError)
 }
 
@@ -145,12 +144,8 @@ public class FoursquareAPIClient {
                 if case (200..<300)? = (response as? HTTPURLResponse)?.statusCode {
                     completion(Result(value: data))
                 } else {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        completion(Result(error: .apiError(FoursquareAPIError(json: json))))
-                    } catch {
-                        completion(Result(error: .responseParseError(error)))
-                    }
+                    let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                    completion(Result(error: .apiError(FoursquareAPIError(json: json))))
                 }
             default:
                 fatalError("invalid response combination \(data.debugDescription), \(response.debugDescription), \(error.debugDescription).")
@@ -216,12 +211,8 @@ public class FoursquareAPIClient {
                 if case (200..<300)? = (response as? HTTPURLResponse)?.statusCode {
                     completion(Result(value: data))
                 } else {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        completion(Result(error: .apiError(FoursquareAPIError(json: json))))
-                    } catch {
-                        completion(Result(error: .responseParseError(error)))
-                    }
+                    let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                    completion(Result(error: .apiError(FoursquareAPIError(json: json))))
                 }
             default:
                 fatalError("invalid response combination \(data.debugDescription), \(response.debugDescription), \(error.debugDescription).")
