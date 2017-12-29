@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		216A64491C67881E00129C58 /* FoursquareAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */; };
 		21A448061FF697E600705DBE /* FoursquareAPIClient_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A448041FF697E600705DBE /* FoursquareAPIClient_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		21A448091FF697E600705DBE /* FoursquareAPIClient_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A448021FF697E600705DBE /* FoursquareAPIClient_iOS.framework */; };
-		21A4480A1FF697E600705DBE /* FoursquareAPIClient_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21A448021FF697E600705DBE /* FoursquareAPIClient_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		21A448091FF697E600705DBE /* FoursquareAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A448021FF697E600705DBE /* FoursquareAPIClient.framework */; };
+		21A4480A1FF697E600705DBE /* FoursquareAPIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21A448021FF697E600705DBE /* FoursquareAPIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		21A4480F1FF6983F00705DBE /* FoursquareAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D02B271B60B4B00030F2D7 /* FoursquareAPIClient.swift */; };
 		21A448101FF6983F00705DBE /* FoursquareAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6B4D1B66216F002F2A41 /* FoursquareAuthClient.swift */; };
 		21A448111FF6983F00705DBE /* FoursquareAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6B4B1B63140A002F2A41 /* FoursquareAuthViewController.swift */; };
@@ -60,7 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				21A4480A1FF697E600705DBE /* FoursquareAPIClient_iOS.framework in Embed Frameworks */,
+				21A4480A1FF697E600705DBE /* FoursquareAPIClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +70,7 @@
 /* Begin PBXFileReference section */
 		1066D6F6CD46585720A654B2 /* Pods-FoursquareAPIClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareAPIClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoursquareAPIClient/Pods-FoursquareAPIClient.debug.xcconfig"; sourceTree = "<group>"; };
 		175DA5687E718AA4F98184AB /* Pods_FoursquareAPIClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoursquareAPIClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		21A448021FF697E600705DBE /* FoursquareAPIClient_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FoursquareAPIClient_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A448021FF697E600705DBE /* FoursquareAPIClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FoursquareAPIClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A448041FF697E600705DBE /* FoursquareAPIClient_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoursquareAPIClient_iOS.h; sourceTree = "<group>"; };
 		21A448051FF697E600705DBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AAEAA21B607EFC0067944E /* FoursquareAPIClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoursquareAPIClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6C5D1D53A77FA077D958A77 /* Pods_FoursquareAPIClient.framework in Frameworks */,
-				21A448091FF697E600705DBE /* FoursquareAPIClient_iOS.framework in Frameworks */,
+				21A448091FF697E600705DBE /* FoursquareAPIClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +163,7 @@
 			children = (
 				21AAEAA21B607EFC0067944E /* FoursquareAPIClient.app */,
 				21AAEAB71B607EFC0067944E /* FoursquareAPIClientTests.xctest */,
-				21A448021FF697E600705DBE /* FoursquareAPIClient_iOS.framework */,
+				21A448021FF697E600705DBE /* FoursquareAPIClient.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,7 +288,7 @@
 			);
 			name = "FoursquareAPIClient-iOS";
 			productName = "FoursquareAPIClient-iOS";
-			productReference = 21A448021FF697E600705DBE /* FoursquareAPIClient_iOS.framework */;
+			productReference = 21A448021FF697E600705DBE /* FoursquareAPIClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		21AAEAA11B607EFC0067944E /* FoursquareAPIClient */ = {
@@ -554,7 +554,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.koogawa.FoursquareAPIClient-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = FoursquareAPIClient;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
@@ -586,7 +586,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.koogawa.FoursquareAPIClient-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = FoursquareAPIClient;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;

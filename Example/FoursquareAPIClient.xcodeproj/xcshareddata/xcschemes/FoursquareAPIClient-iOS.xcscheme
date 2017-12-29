@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "21A448011FF697E600705DBE"
-               BuildableName = "FoursquareAPIClient_iOS.framework"
+               BuildableName = "FoursquareAPIClient.framework"
                BlueprintName = "FoursquareAPIClient-iOS"
                ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "21A448011FF697E600705DBE"
-            BuildableName = "FoursquareAPIClient_iOS.framework"
+            BuildableName = "FoursquareAPIClient.framework"
             BlueprintName = "FoursquareAPIClient-iOS"
             ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "21A448011FF697E600705DBE"
-            BuildableName = "FoursquareAPIClient_iOS.framework"
+            BuildableName = "FoursquareAPIClient.framework"
             BlueprintName = "FoursquareAPIClient-iOS"
             ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
          </BuildableReference>
