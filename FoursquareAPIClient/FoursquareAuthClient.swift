@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Kosuke Ogawa. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 @objc public protocol FoursquareAuthClientDelegate {
     func foursquareAuthClientDidSucceed(accessToken: String)
