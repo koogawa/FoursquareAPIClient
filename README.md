@@ -1,6 +1,8 @@
 # FoursquareAPIClient
 
-[![Build Status](https://www.bitrise.io/app/b220011d79899255.svg?token=Qq5QKCXCQgLZdEHECb1jOQ&branch=master)](https://www.bitrise.io/app/b220011d79899255) ![](https://img.shields.io/cocoapods/v/FoursquareAPIClient.svg?style=flat)
+[![Build Status](https://www.bitrise.io/app/b220011d79899255.svg?token=Qq5QKCXCQgLZdEHECb1jOQ&branch=master)](https://www.bitrise.io/app/b220011d79899255)
+![](https://img.shields.io/cocoapods/v/FoursquareAPIClient.svg?style=flat)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/koogawa/FoursquareAPIClient)
 
 `FoursquareAPIClient` is very simple Swift networking library for Foursquare API v2.
 
@@ -8,7 +10,7 @@
 
 ## Installation
 
-### From CocoaPods
+### CocoaPods
 
 First, add the following line to your [Podfile](http://guides.cocoapods.org/using/using-cocoapods.html):
 
@@ -21,6 +23,17 @@ Second, install `FoursquareAPIClient` into your project:
 ```ruby
 pod install
 ```
+
+### Carthage
+
+- Add it to your Cartfile:
+```
+github "koogawa/FoursquareAPIClient"
+```
+- Run `carthage update --platform iOS`
+- Add 'FoursquareAPIClient.framework' to 'Linked Frameworks and Library' on your project.
+- Add `/usr/local/bin/carthage copy-frameworks` to 'New Run Script Phase'.
+- Add `$(SRCROOT)/Carthage/Build/iOS/FoursquareAPIClient.framework` to 'Input Files'.
 
 ### Manually
 
