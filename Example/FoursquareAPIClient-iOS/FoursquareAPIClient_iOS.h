@@ -3,7 +3,7 @@
 //  FoursquareAPIClient-iOS
 //
 //  Created by koogawa on 2017/12/30.
-//  Copyright © 2017年 Kosuke Ogawa. All rights reserved.
+//  Copyright © 2017 Kosuke Ogawa. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
