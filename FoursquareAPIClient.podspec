@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name             = "FoursquareAPIClient"
-  s.version          = "3.0.0"
+  s.version          = "4.0.1"
   s.summary          = "Very simple Swift networking library for Foursquare API v2"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
+#   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description      = "FoursquareAPIClient is very simple Swift networking library for Foursquare API v2"
   s.homepage         = "https://github.com/koogawa/FoursquareAPIClient"
   s.screenshots     = "https://raw.githubusercontent.com/koogawa/FoursquareAPIClient/master/screen.png"
@@ -36,6 +36,6 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   s.pod_target_xcconfig =  {
-    'SWIFT_VERSION' => '3.0'
+    'SWIFT_VERSION' => '4.0'
   }
 end

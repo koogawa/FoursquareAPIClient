@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21AAEAA11B607EFC0067944E"
-               BuildableName = "FoursquareAPIClient.app"
-               BlueprintName = "FoursquareAPIClient"
-               ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21AAEAB61B607EFC0067944E"
-               BuildableName = "FoursquareAPIClientTests.xctest"
-               BlueprintName = "FoursquareAPIClientTests"
+               BlueprintIdentifier = "21A448011FF697E600705DBE"
+               BuildableName = "FoursquareAPIClient.framework"
+               BlueprintName = "FoursquareAPIClient-iOS"
                ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,26 +29,7 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21AAEAB61B607EFC0067944E"
-               BuildableName = "FoursquareAPIClientTests.xctest"
-               BlueprintName = "FoursquareAPIClientTests"
-               ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21AAEAA11B607EFC0067944E"
-            BuildableName = "FoursquareAPIClient.app"
-            BlueprintName = "FoursquareAPIClient"
-            ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -77,16 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21AAEAA11B607EFC0067944E"
-            BuildableName = "FoursquareAPIClient.app"
-            BlueprintName = "FoursquareAPIClient"
+            BlueprintIdentifier = "21A448011FF697E600705DBE"
+            BuildableName = "FoursquareAPIClient.framework"
+            BlueprintName = "FoursquareAPIClient-iOS"
             ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -96,16 +62,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21AAEAA11B607EFC0067944E"
-            BuildableName = "FoursquareAPIClient.app"
-            BlueprintName = "FoursquareAPIClient"
+            BlueprintIdentifier = "21A448011FF697E600705DBE"
+            BuildableName = "FoursquareAPIClient.framework"
+            BlueprintName = "FoursquareAPIClient-iOS"
             ReferencedContainer = "container:FoursquareAPIClient.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
