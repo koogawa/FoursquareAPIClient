@@ -36,7 +36,7 @@ class FoursquareAuthViewController: UIViewController {
         super.viewDidLoad()
 
         // Cancel button
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel,
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
             target: self,
             action: #selector(FoursquareAuthViewController.cancelButtonDidTap(_:)))
         navigationItem.leftBarButtonItem = cancelButton

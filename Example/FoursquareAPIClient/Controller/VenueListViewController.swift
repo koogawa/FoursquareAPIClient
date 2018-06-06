@@ -119,10 +119,10 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
                         let alertController =
                             UIAlertController(title: "Checkin failed",
                                               message: error.localizedDescription,
-                                              preferredStyle: UIAlertControllerStyle.alert)
+                                              preferredStyle: UIAlertController.Style.alert)
                         let cancelAction: UIAlertAction =
                             UIAlertAction(title: "Close",
-                                          style: UIAlertActionStyle.cancel,
+                                          style: UIAlertAction.Style.cancel,
                                           handler: nil)
                         alertController.addAction(cancelAction)
                         self?.present(alertController, animated: true, completion: nil)
@@ -130,10 +130,10 @@ class VenueListViewController: UITableViewController, CLLocationManagerDelegate 
                         let alertController =
                             UIAlertController(title: "Checkin success",
                                               message: checkin?.venue.name,
-                                              preferredStyle: UIAlertControllerStyle.alert)
+                                              preferredStyle: UIAlertController.Style.alert)
                         let cancelAction: UIAlertAction =
                             UIAlertAction(title: "Close",
-                                          style: UIAlertActionStyle.cancel,
+                                          style: UIAlertAction.Style.cancel,
                                           handler: nil)
                         alertController.addAction(cancelAction)
                         self?.present(alertController, animated: true, completion: nil)
