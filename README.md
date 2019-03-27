@@ -185,7 +185,7 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 4.0 / iOS 8.0+
+Swift 5.0 / iOS 8.0+
 
 ## Creator
 
