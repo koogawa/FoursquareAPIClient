@@ -362,10 +362,9 @@
 			};
 			buildConfigurationList = 21AAEA9D1B607EFC0067944E /* Build configuration list for PBXProject "FoursquareAPIClient" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
