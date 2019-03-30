@@ -13,19 +13,6 @@ public enum HTTPMethod: String {
     case post = "POST"
 }
 
-public enum Result<T, Error> {
-    case success(T)
-    case failure(Error)
-
-    init(value: T) {
-        self = .success(value)
-    }
-
-    init(error: Error) {
-        self = .failure(error)
-    }
-}
-
 public enum FoursquareClientError: Error {
     case connectionError(Error)
     case responseParseError(Error)
@@ -140,16 +127,16 @@ public class FoursquareAPIClient {
             data, response, error in
             switch (data, response, error) {
             case (_, _, let error?):
-                completion(Result(error: .connectionError(error)))
+                completion(.failure(.connectionError(error)))
             case (let data?, let response?, _):
                 if case (200..<300)? = (response as? HTTPURLResponse)?.statusCode {
-                    completion(Result(value: data))
+                    completion(.success(data))
                 } else {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        completion(Result(error: .apiError(FoursquareAPIError(json: json))))
+                        completion(.failure(.apiError(FoursquareAPIError(json: json))))
                     } catch {
-                        completion(Result(error: .responseParseError(error)))
+                        completion(.failure(.responseParseError(error)))
                     }
                 }
             default:
@@ -211,16 +198,16 @@ public class FoursquareAPIClient {
             data, response, error in
             switch (data, response, error) {
             case (_, _, let error?):
-                completion(Result(error: .connectionError(error)))
+                completion(.failure(.connectionError(error)))
             case (let data?, let response?, _):
                 if case (200..<300)? = (response as? HTTPURLResponse)?.statusCode {
-                    completion(Result(value: data))
+                    completion(.success(data))
                 } else {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        completion(Result(error: .apiError(FoursquareAPIError(json: json))))
+                        completion(.failure(.apiError(FoursquareAPIError(json: json))))
                     } catch {
-                        completion(Result(error: .responseParseError(error)))
+                        completion(.failure(.responseParseError(error)))
                     }
                 }
             default:
