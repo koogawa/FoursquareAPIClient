@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Select Xcode version
+      run: xcode-select -s '/Applications/Xcode_10.3.app/Contents/Developer'
+    - name: Show Xcode version
+      run: xcodebuild -version
+    - name: Build
+      run: xcodebuild -sdk iphonesimulator -configuration Debug build 
