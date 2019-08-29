@@ -13,5 +13,7 @@ jobs:
       run: sudo xcode-select -s '/Applications/Xcode_10.3.app/Contents/Developer'
     - name: Show Xcode version
       run: xcodebuild -version
+    - name: Install CocoaPods
+      run: pod install
     - name: Build
       run: xcodebuild -workspace "./Example/FoursquareAPIClient.xcworkspace" -scheme FoursquareAPIClient -sdk iphonesimulator -configuration Debug build 
