@@ -15,5 +15,5 @@ jobs:
       run: xcodebuild -version
     - name: Install CocoaPods
       run: pod install --project-directory=./Example/
-    - name: Build
+    - name: Xcode Test
       run: xcodebuild -workspace "./Example/FoursquareAPIClient.xcworkspace" -scheme FoursquareAPIClient -sdk iphonesimulator -configuration Debug build -destination 'platform=iOS Simulator,OS=12.4,name=iPhone 6' clean test 
