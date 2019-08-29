@@ -14,4 +14,4 @@ jobs:
     - name: Show Xcode version
       run: xcodebuild -version
     - name: Build
-      run: xcodebuild -workspace "./Example/FoursquareAPIClient.xcworkspace" -sdk iphonesimulator -configuration Debug build 
+      run: xcodebuild -workspace "./Example/FoursquareAPIClient.xcworkspace" -scheme FoursquareAPIClient -sdk iphonesimulator -configuration Debug build 
