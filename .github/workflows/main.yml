@@ -9,13 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Change directory
-      run: cd Example
     - name: Select Xcode version
       run: sudo xcode-select -s '/Applications/Xcode_10.3.app/Contents/Developer'
     - name: Show Xcode version
       run: xcodebuild -version
     - name: Install CocoaPods
-      run: pod install
+      run: pod install --project-directory=./Example/
     - name: Build
-      run: xcodebuild -workspace "FoursquareAPIClient.xcworkspace" -scheme FoursquareAPIClient -sdk iphonesimulator -configuration Debug build 
+      run: xcodebuild -workspace "./Example/FoursquareAPIClient.xcworkspace" -scheme FoursquareAPIClient -sdk iphonesimulator -configuration Debug build 
