@@ -90,8 +90,18 @@ public class FoursquareAPIClient {
     /// - parameter completion: Completion handler
     public func request(path: String,
                         method: HTTPMethod = .get,
-                        parameter: [String: String],
-                        completion: @escaping (Result<Data, FoursquareClientError>) -> Void) {
+                        parameter: [String: String]) async throws -> Data {
+        try await withUnsafeThrowingContinuation { continuation in
+            request(path: path, method: method, parameter: parameter) { data in
+                continuation.resume(with: data)
+            }
+        }
+    }
+
+    private func request(path: String,
+                         method: HTTPMethod,
+                         parameter: [String: String],
+                         completion: @escaping (Result<Data, FoursquareClientError>) -> Void) {
         // Add necessary parameters
         var parameter = parameter
         if let accessToken = self.accessToken {
