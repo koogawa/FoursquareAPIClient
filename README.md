@@ -1,6 +1,6 @@
 # FoursquareAPIClient
 
-[![Build Status](https://app.bitrise.io/app/b220011d79899255.svg?token=Qq5QKCXCQgLZdEHECb1jOQ&branch=master)](https://www.bitrise.io/app/b220011d79899255)
+[![Build Status](https://app.bitrise.io/app/17cd923d1ab78240/status.svg?token=DivdKwbflJCNl7iXujMIOA&branch=master)](https://app.bitrise.io/app/17cd923d1ab78240)
 ![](https://img.shields.io/cocoapods/v/FoursquareAPIClient.svg?style=flat)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/koogawa/FoursquareAPIClient)
 
@@ -185,7 +185,7 @@ func foursquareAuthClientDidFail(error: NSError) {
 
 ## Requirements
 
-Swift 5.0 / iOS 8.0+
+Swift 5.0 / iOS 12.0+
 
 ## Creator
 
